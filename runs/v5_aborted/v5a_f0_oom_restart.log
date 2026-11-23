@@ -1,0 +1,3 @@
+composite: 10732/12265 rows eligible -> effective composite rate 0.44 (requested 0.50)
+{"epoch": 1, "train_loss": 1.563410605621338, "pv_val_f1": 0.6353743619697322, "field_f1": 0.29177167226366313, "seconds": 562.1}
+{"epoch": 2, "train_loss": 0.9817320369720459, "pv_val_f1": 0.8944147462962487, "field_f1": 0.4560385926087959, "seconds": 564.6}

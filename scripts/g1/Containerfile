@@ -1,0 +1,54 @@
+# G1: build the ExecuTorch llama runner pinned to the release that exported the .pte.
+# The .pte's export recipe (HF repo, rev 911221e0) installs executorch==0.6.0 / torch==2.7.0.
+# Debian bookworm = glibc 2.36, same family as Raspberry Pi OS Bookworm (see addenda #4).
+FROM docker.io/library/python:3.11-bookworm
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential git ninja-build time \
+ && rm -rf /var/lib/apt/lists/*
+
+# Build-time Python deps for ExecuTorch's kernel codegen; cmake<4 keeps old submodules configurable.
+RUN pip install --no-cache-dir torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu \
+ && pip install --no-cache-dir "cmake<4" pyyaml ruamel.yaml
+
+# JOBS: 16 on the x86 dev box; use --build-arg JOBS=3 on the Pi 5 (8 GB).
+ARG JOBS=16
+ARG ET_COMMIT=e67ef3b149688b4085605495690d0d5c6420b45a
+RUN git clone https://github.com/pytorch/executorch.git /opt/executorch \
+ && cd /opt/executorch \
+ && git checkout ${ET_COMMIT} \
+ && git submodule update --init --recursive
+
+WORKDIR /opt/executorch
+
+# ET 0.6's CMake generates its source lists with buck2; tools/cmake/resolve_buck.py downloads
+# the pinned buck2 binary and needs `zstd` to unpack it (first build failed without it).
+RUN pip install --no-cache-dir zstd
+
+# Step 1: core runtime + XNNPACK + optimized/quantized/custom kernels (flags from release/0.6 llama README).
+RUN cmake -DPYTHON_EXECUTABLE=python \
+      -DCMAKE_INSTALL_PREFIX=cmake-out \
+      -DEXECUTORCH_ENABLE_LOGGING=1 \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DEXECUTORCH_BUILD_EXTENSION_DATA_LOADER=ON \
+      -DEXECUTORCH_BUILD_EXTENSION_MODULE=ON \
+      -DEXECUTORCH_BUILD_EXTENSION_TENSOR=ON \
+      -DEXECUTORCH_BUILD_XNNPACK=ON \
+      -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
+      -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
+      -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
+      -Bcmake-out . \
+ && cmake --build cmake-out -j${JOBS} --target install --config Release
+
+# Step 2: llama_main runner.
+RUN cmake -DPYTHON_EXECUTABLE=python \
+      -DCMAKE_INSTALL_PREFIX=cmake-out \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
+      -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
+      -DEXECUTORCH_BUILD_XNNPACK=ON \
+      -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
+      -Bcmake-out/examples/models/llama \
+      examples/models/llama \
+ && cmake --build cmake-out/examples/models/llama -j${JOBS} --config Release \
+ && ln -s /opt/executorch/cmake-out/examples/models/llama/llama_main /usr/local/bin/llama_main

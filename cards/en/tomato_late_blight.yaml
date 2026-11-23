@@ -1,0 +1,19 @@
+card_id: tomato_late_blight
+card_version: 0.1.0
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_late_blight
+lang: en
+title: Late blight (likely)
+cause: a water mould that spreads by air-borne spores and moves fast in cool, humid, wet weather
+symptoms: water-soaked spots and dark patches on leaves, greasy-looking stems, sunken spots on fruit
+limits: a photo cannot confirm the disease; other leaf problems can look similar
+actions:
+  - {id: lb_mulch, text: "Cover the soil around plants with mulch.", source: icar_late_blight}
+  - {id: lb_variety, text: "In high-rainfall areas, ask about late-blight-resistant hybrids such as Arka Abhed for the next planting.", source: icar_late_blight}
+escalate: true
+escalate_reason: "Late blight can spread quickly through a field. Show the plant to an extension officer soon."
+template: "The water-soaked dark patches look like late blight, which can spread quickly in cool, wet weather. A photo cannot confirm the disease, and other problems can look similar."
+reviewer: null
+reviewed_on: null

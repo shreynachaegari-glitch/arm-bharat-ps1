@@ -1,0 +1,7 @@
+<|start_header_id|>system<|end_header_id|>
+
+You explain a plant-health finding to a farmer in simple English. Use only the facts in the CARD. Do not add treatments, products, doses or numbers. Do not say the diagnosis is certain. Write at most three short sentences.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+CARD: crop=tomato; finding=likely early blight; cause=a fungus whose spores spread by wind and need moisture to infect; symptoms=brown or black spots with rings like a target, leathery, usually on older leaves first; fruit can get sunken dry spots; limits=a photo cannot confirm the disease; other leaf spots can look similar early on.
+Explain what the farmer may be seeing and why it is only a likely match.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+

@@ -1,0 +1,69 @@
+{
+ "temperature": 1.5964573621749878,
+ "classes": [
+  "tomato_bacterial_spot",
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_septoria_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "n": {
+  "known_field": 263,
+  "ood_field_seen_types": 116,
+  "ood_novel_india": 68
+ },
+ "known_field_macro_f1": 0.5692958167586158,
+ "known_sent_to_other": 0.07224334600760456,
+ "points": [
+  {
+   "threshold": 0.0,
+   "known_coverage": 0.9277566539923955,
+   "accepted_error": 0.38934426229508196,
+   "false_accept_ood_field_seen_types": 0.3793103448275862,
+   "false_accept_ood_novel_india": 0.8970588235294118
+  },
+  {
+   "threshold": 0.4,
+   "known_coverage": 0.7186311787072244,
+   "accepted_error": 0.3862433862433862,
+   "false_accept_ood_field_seen_types": 0.22413793103448276,
+   "false_accept_ood_novel_india": 0.6176470588235294
+  },
+  {
+   "threshold": 0.5,
+   "known_coverage": 0.55893536121673,
+   "accepted_error": 0.32653061224489793,
+   "false_accept_ood_field_seen_types": 0.1206896551724138,
+   "false_accept_ood_novel_india": 0.4411764705882353
+  },
+  {
+   "threshold": 0.6,
+   "known_coverage": 0.4068441064638783,
+   "accepted_error": 0.3177570093457944,
+   "false_accept_ood_field_seen_types": 0.08620689655172414,
+   "false_accept_ood_novel_india": 0.2647058823529412
+  },
+  {
+   "threshold": 0.7,
+   "known_coverage": 0.2889733840304182,
+   "accepted_error": 0.2631578947368421,
+   "false_accept_ood_field_seen_types": 0.034482758620689655,
+   "false_accept_ood_novel_india": 0.19117647058823528
+  },
+  {
+   "threshold": 0.8,
+   "known_coverage": 0.14068441064638784,
+   "accepted_error": 0.1891891891891892,
+   "false_accept_ood_field_seen_types": 0.008620689655172414,
+   "false_accept_ood_novel_india": 0.07352941176470588
+  },
+  {
+   "threshold": 0.9,
+   "known_coverage": 0.04182509505703422,
+   "accepted_error": 0.18181818181818182,
+   "false_accept_ood_field_seen_types": 0.0,
+   "false_accept_ood_novel_india": 0.029411764705882353
+  }
+ ]
+}

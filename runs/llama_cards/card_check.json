@@ -1,0 +1,56 @@
+{
+ "generated": "2026-11-21T14:58:54",
+ "checker": "c4",
+ "runner": [
+  "podman",
+  "run",
+  "--rm",
+  "--network=none",
+  "-v",
+  "/home/tg/hello-world/arm-bharat-ps1/artifacts/llama:/models:ro,Z",
+  "ps1-et:0.6.0",
+  "llama_main"
+ ],
+ "system_rules": "You rewrite reviewed plant-health advice for a farmer in simple English. Use only the facts given. Do not add treatments, products, doses, numbers, weather or causes that are not given. Keep the warning that a photo cannot confirm the problem. Speak to the farmer as 'you'. Write two or three short sentences.",
+ "rows": [
+  {
+   "card": "tomato_early_blight",
+   "card_version": "0.1.0",
+   "called": true,
+   "shown_source": "template",
+   "checker_result": "fail",
+   "reasons": [
+    "too many sentences"
+   ],
+   "latency_s": 3.89,
+   "shown_text": "The spots with rings on the older leaves look like early blight. A photo cannot confirm the disease, and other leaf spots can look similar.",
+   "generated": "Look at the spots on the older leaves. They have rings. This might be early blight. A photo can't tell for sure, but other spots on the leaves can look the same."
+  },
+  {
+   "card": "tomato_healthy",
+   "called": false
+  },
+  {
+   "card": "tomato_late_blight",
+   "card_version": "0.1.0",
+   "called": true,
+   "shown_source": "llama",
+   "checker_result": "pass",
+   "reasons": [],
+   "latency_s": 3.96,
+   "shown_text": "Look at the dark spots on your plants. They might be late blight, which can spread quickly in wet weather. A photo can't tell for sure, so be careful not to jump to conclusions.",
+   "generated": "Look at the dark spots on your plants. They might be late blight, which can spread quickly in wet weather. A photo can't tell for sure, so be careful not to jump to conclusions."
+  },
+  {
+   "card": "tomato_leaf_spot",
+   "card_version": "0.2.1",
+   "called": true,
+   "shown_source": "llama",
+   "checker_result": "pass",
+   "reasons": [],
+   "latency_s": 3.96,
+   "shown_text": "Look at the small dark spots on your plants. They might be caused by a fungus or bacteria. A photo can't tell which one it is, and other problems can look similar.",
+   "generated": "Look at the small dark spots on your plants. They might be caused by a fungus or bacteria. A photo can't tell which one it is, and other problems can look similar."
+  }
+ ]
+}

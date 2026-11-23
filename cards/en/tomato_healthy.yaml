@@ -1,0 +1,16 @@
+card_id: tomato_healthy
+card_version: 0.2.0
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_healthy
+lang: en
+title: No listed disease pattern seen in this photo
+cause: none seen
+symptoms: the leaf in the photo shows none of the spots this assistant knows
+limits: one photo of one leaf cannot show the health of the whole plant or field; this assistant only knows a few diseases
+actions: []
+escalate: false
+template: "This photo shows none of the leaf-spot or blight patterns this assistant knows. It does not show that the plant or field is healthy, so keep checking the plants."
+reviewer: null
+reviewed_on: null

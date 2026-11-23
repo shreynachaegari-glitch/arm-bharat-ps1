@@ -1,0 +1,21 @@
+card_id: tomato_septoria_leaf_spot
+card_version: 0.1.0
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_septoria_leaf_spot
+lang: en
+title: Septoria leaf spot (likely)
+cause: a fungus that survives on old tomato plants and some weeds and spreads by splashing water
+symptoms: many small dark spots with grey centres, first on the lowest, oldest leaves, moving upward
+limits: a photo cannot confirm the disease; other leaf spots can look similar early on
+actions:
+  - {id: sls_irrigation, text: "Use drip or ground-level watering instead of watering over the leaves.", source: uconn_septoria}
+  - {id: sls_airflow, text: "Stake or trellis plants so the leaves dry faster and stay off the soil.", source: uconn_septoria}
+  - {id: sls_weeds, text: "Remove weeds of the tomato family, such as nightshade, in and around the field.", source: uconn_septoria}
+  - {id: sls_debris, text: "After harvest, bury or destroy the old plant remains.", source: uconn_septoria}
+  - {id: sls_rotation, text: "Do not plant tomato in the same place for the next two to three years.", source: uconn_septoria}
+escalate: false
+template: "The many small spots with grey centres on the lower leaves look like Septoria leaf spot. A photo cannot confirm the disease, and other leaf spots can look similar."
+reviewer: null
+reviewed_on: null

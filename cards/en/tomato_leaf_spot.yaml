@@ -1,0 +1,23 @@
+card_id: tomato_leaf_spot
+card_version: 0.2.1
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_leaf_spot
+lang: en
+title: Leaf spots (likely; bacterial spot or Septoria)
+cause: either a fungus (Septoria) or bacteria (bacterial spot); both spread in splashing water and on wet hands and tools, and a photo cannot tell which one it is
+symptoms: many small dark spots on the leaves, sometimes with grey centres or a yellow edge, often starting on the lower leaves
+limits: a photo cannot tell a fungal leaf spot from a bacterial one, and other problems can look similar
+actions:
+  - {id: ls_irrigation, text: "Use drip or ground-level watering instead of watering over the leaves.", source: uconn_septoria}
+  - {id: ls_wet, text: "Do not handle, tie or harvest plants while the leaves are wet.", source: ncsu_bacterial_spot}
+  - {id: ls_weeds, text: "Remove weeds of the tomato family and volunteer tomato plants near the field.", source: ncsu_bacterial_spot}
+  - {id: ls_debris, text: "After harvest, bury or destroy the old plant remains.", source: uconn_septoria}
+  - {id: ls_rotation, text: "Next season, plant a crop that is not tomato, chilli or brinjal in this place.", source: ncsu_bacterial_spot}
+  - {id: ls_seed, text: "Next season, use certified seed and healthy seedlings, and reject seedlings with spots.", source: ncsu_bacterial_spot}
+escalate: false
+cause_alternatives: [[septoria, fung], [bacteri]]
+template: "The small dark spots look like a leaf-spot problem, caused either by a fungus or by bacteria. A photo cannot tell which one it is, and other problems can look similar."
+reviewer: null
+reviewed_on: null

@@ -1,0 +1,32 @@
+{
+ "status": "confirmed",
+ "confirmed_by": "Sreyesh, 2026-11-21 19:26-19:31 IST (chat: threshold 0.80; input gate waived; quality q1-dev; accepted error max 0.30 kept)",
+ "pte_sha256": "6ecd519a8a184984854394a265fff9e507cbde8a363b3d3fd0a2ef7565450140",
+ "threshold": 0.8,
+ "quality_thresholds_version": "q1-dev",
+ "input_gate": "waived",
+ "note": "CONFIRMED for v7_final (EMA). Evidence: runs/v7_final/gate_sheet.md (vault Gate Sheet v7_final 2026-11-21 (C)) and vault Gate Decision Sheet 2026-11-04 (C). Input gate waived: sealed false accepts are an upper bound and coverage is optimistic. Run on x86 (Pi not here); the Pi golden check comes later. The sealed run pins this file's hash, so it cannot change afterwards.",
+ "blocking": {
+  "accepted_error": {
+   "max": 0.3
+  },
+  "false_accept_seen": {
+   "max": 0.1
+  },
+  "coverage": {
+   "min": 0.25
+  },
+  "sick_called_healthy": {
+   "max": 0.03
+  }
+ },
+ "report_only": {
+  "false_accept_novel": {
+   "max": 0.3
+  },
+  "ood_called_healthy": {
+   "max": 0.05
+  }
+ },
+ "decision_sha256": "2b51071a7fd3ad42ba4bb426dd350b9636b3615764d131bf3ba098fd8bcf39b5"
+}

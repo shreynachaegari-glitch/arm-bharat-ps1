@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tomato Leaf Check</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="leaf-mark" aria-hidden="true"></span>
+      <div>
+        <h1>Tomato Leaf Check</h1>
+        <p class="tag">Runs on this device. No internet needed.</p>
+      </div>
+    </div>
+  </header>
+
+  {% if model_note %}
+  <p class="banner" id="model-note" role="note"><strong>{{ model_note }}</strong></p>
+  {% endif %}
+  {% if not cards_reviewed %}
+  <p class="banner" role="note"><strong>Draft advice.</strong> These advice cards have not yet been reviewed by an
+    agriculture expert. Use for testing only.</p>
+  {% endif %}
+
+  <main>
+    <form id="check-form" class="panel" novalidate>
+      <label class="lang">Language
+        <select name="lang" id="lang">
+          <option value="en" {% if 'en' not in languages %}disabled{% endif %}>English</option>
+          <option value="hi" {% if 'hi' not in languages %}disabled{% endif %}>हिन्दी (after expert review)</option>
+          <option value="te" {% if 'te' not in languages %}disabled{% endif %}>తెలుగు (after expert review)</option>
+        </select>
+      </label>
+
+      <label class="shoot" for="photo">
+        <span class="shoot-icon" aria-hidden="true"></span>
+        <span class="shoot-text">Take a photo of <b>one tomato leaf</b></span>
+        <span class="shoot-hint">Hold it flat, in daylight, filling the frame</span>
+      </label>
+      <input id="photo" name="photo" type="file" accept="image/*" capture="environment" hidden>
+
+      <figure id="preview" class="preview" hidden>
+        <img id="preview-img" alt="The photo you took">
+      </figure>
+
+      <button id="check-btn" class="primary" type="submit" disabled>Check this leaf</button>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section id="result" class="panel result" hidden aria-live="polite">
+      <p id="result-kicker" class="kicker"></p>
+      <h2 id="result-title"></h2>
+      <p id="explanation" class="explanation"></p>
+      <p id="explanation-source" class="source-note"></p>
+
+      <div id="actions-block" hidden>
+        <h3>What you can do now</h3>
+        <ol id="actions" class="actions"></ol>
+      </div>
+
+      <p id="chemical" class="chemical" hidden></p>
+
+      <div id="escalate" class="escalate" hidden>
+        <h3>Show the plant to an extension officer</h3>
+        <p id="escalate-reason"></p>
+        <p id="contact" class="contact"></p>
+      </div>
+
+      <details id="sources-block" class="sources" hidden>
+        <summary>Where this advice comes from</summary>
+        <ul id="sources"></ul>
+      </details>
+
+      <p id="meta" class="meta"></p>
+      <button id="again" class="secondary" type="button">Check another leaf</button>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>A photo can suggest a problem but cannot confirm it. For pesticides and doses, ask your extension officer or
+      the Kisan Call Centre.</p>
+  </footer>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

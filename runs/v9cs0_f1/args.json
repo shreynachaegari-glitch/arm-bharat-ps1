@@ -1,0 +1,23 @@
+{
+ "classes": "tomato_early_blight,tomato_healthy,tomato_late_blight,tomato_leaf_spot,tomato_other_problem",
+ "epochs": 10,
+ "batch": 32,
+ "lr": 0.001,
+ "workers": 2,
+ "threads": 8,
+ "out": "runs/v9cs0_f1",
+ "composite_p": 0.5,
+ "backbone_lr_mult": 1.0,
+ "arch": "effnet_b0",
+ "field_fold": 1,
+ "field_oversample": 8,
+ "samples_per_epoch": 5000,
+ "taxonomy": "t2",
+ "fold_scheme": "stratified",
+ "seed": 0,
+ "ema_decay": 0.998,
+ "ema_start_epoch": 4,
+ "exclude_sources": "maharashtra",
+ "extra_manifest": "data/manifest_extra.csv",
+ "extra_oversample": 1
+}

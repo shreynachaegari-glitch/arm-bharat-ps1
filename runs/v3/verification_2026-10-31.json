@@ -1,0 +1,16 @@
+{
+ "source": "verification run 31 Oct 2026, printed output transcribed here; models runs/v2_f{0,1}/best.pt and runs/v3_f{0,1}/best.pt, roundrobin folds, t1 taxonomy",
+ "like_for_like": {
+  "note": "same held-out field_dev images and PlantDoc OOD images; each fold model scores only its unseen half",
+  "rows": [
+   {"coverage": 0.60, "v2_false_accept": 0.491, "v3_false_accept": 0.181, "v2_accepted_error": 0.310, "v3_accepted_error": 0.342},
+   {"coverage": 0.50, "v2_false_accept": 0.379, "v3_false_accept": 0.121, "v2_accepted_error": 0.277, "v3_accepted_error": 0.313},
+   {"coverage": 0.40, "v2_false_accept": 0.233, "v3_false_accept": 0.086, "v2_accepted_error": 0.229, "v3_accepted_error": 0.305},
+   {"coverage": 0.30, "v2_false_accept": 0.138, "v3_false_accept": 0.043, "v2_accepted_error": 0.228, "v3_accepted_error": 0.256}
+  ]
+ },
+ "bootstrap": {"resamples": 2000, "n": 263,
+  "v2": {"f1": 0.568, "ci": [0.510, 0.625]}, "v3": {"f1": 0.569, "ci": [0.509, 0.629]}, "v3_minus_v2_ci": [-0.050, 0.049]},
+ "v3_confusion": {"classes": ["bacterial_spot", "early_blight", "healthy", "late_blight", "septoria_leaf_spot", "other_problem"],
+  "rows_true_5": [[12, 7, 6, 4, 21, 4], [2, 28, 1, 7, 6, 2], [2, 2, 19, 0, 0, 9], [1, 7, 3, 39, 3, 3], [13, 7, 3, 0, 51, 1]]}
+}

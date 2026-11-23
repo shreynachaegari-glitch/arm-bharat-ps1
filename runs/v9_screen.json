@@ -1,0 +1,105 @@
+{
+ "baseline": {
+  "pd_f1": 0.7053295400663822,
+  "neu_f1": 0.5047176832845975,
+  "S": 0.6050236116754899,
+  "pd_error": 0.08235294117647059,
+  "pd_fa_seen": 0.06896551724137931,
+  "pd_coverage": 0.3231939163498099,
+  "neu_coverage": 0.21921515561569688,
+  "neu_error": 0.24074074074074073,
+  "neu_sick_healthy": 0.0,
+  "neu_fa_ood": 0.0
+ },
+ "variants": {
+  "v9a": {
+   "pd_f1": 0.6965324435550504,
+   "neu_f1": 0.5309749097999686,
+   "S": 0.6137536766775096,
+   "pd_error": 0.10869565217391304,
+   "pd_fa_seen": 0.0603448275862069,
+   "pd_coverage": 0.34980988593155893,
+   "neu_coverage": 0.13058186738836267,
+   "neu_error": 0.11917098445595854,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0
+  },
+  "v9b": {
+   "pd_f1": 0.7301451271526055,
+   "neu_f1": 0.4719159994238731,
+   "S": 0.6010305632882393,
+   "pd_error": 0.07017543859649122,
+   "pd_fa_seen": 0.0603448275862069,
+   "pd_coverage": 0.43346007604562736,
+   "neu_coverage": 0.19688768606224627,
+   "neu_error": 0.15120274914089346,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0
+  },
+  "v9c": {
+   "pd_f1": 0.6923880576230826,
+   "neu_f1": 0.45092403288886446,
+   "S": 0.5716560452559736,
+   "pd_error": 0.09433962264150944,
+   "pd_fa_seen": 0.06896551724137931,
+   "pd_coverage": 0.40304182509505704,
+   "neu_coverage": 0.2523680649526387,
+   "neu_error": 0.3190348525469169,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0
+  },
+  "v9d": {
+   "pd_f1": 0.6813957108142563,
+   "neu_f1": 0.47867078434728516,
+   "S": 0.5800332475807708,
+   "pd_error": 0.11392405063291139,
+   "pd_fa_seen": 0.06896551724137931,
+   "pd_coverage": 0.30038022813688214,
+   "neu_coverage": 0.15967523680649526,
+   "neu_error": 0.2076271186440678,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0
+  }
+ },
+ "changes": {
+  "v9a": "--epochs 20 --ema-start-epoch 8",
+  "v9b": "--backbone-lr-mult 0.3",
+  "v9c": "--backbone-lr-mult 1.0",
+  "v9d": "--extra-oversample 2"
+ },
+ "checks": {
+  "v9a": {
+   "pd_error": true,
+   "pd_fa_seen": true,
+   "neu_error": true,
+   "neu_sick_healthy": true,
+   "neu_fa_ood": true,
+   "margin": false
+  },
+  "v9b": {
+   "pd_error": true,
+   "pd_fa_seen": true,
+   "neu_error": true,
+   "neu_sick_healthy": true,
+   "neu_fa_ood": true,
+   "margin": false
+  },
+  "v9c": {
+   "pd_error": true,
+   "pd_fa_seen": true,
+   "neu_error": false,
+   "neu_sick_healthy": true,
+   "neu_fa_ood": true,
+   "margin": false
+  },
+  "v9d": {
+   "pd_error": false,
+   "pd_fa_seen": true,
+   "neu_error": true,
+   "neu_sick_healthy": true,
+   "neu_fa_ood": true,
+   "margin": false
+  }
+ },
+ "winner": null
+}

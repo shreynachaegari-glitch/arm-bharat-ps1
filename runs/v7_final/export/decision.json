@@ -1,0 +1,14 @@
+{
+ "version": "d-6ecd519a-t0.8",
+ "pte_sha256": "6ecd519a8a184984854394a265fff9e507cbde8a363b3d3fd0a2ef7565450140",
+ "classes": [
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "temperature": 1.3060697317123413,
+ "threshold": 0.8,
+ "source": "dev estimate from runs/v7s0_ema/abstention_oe_dev.json"
+}

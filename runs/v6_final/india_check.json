@@ -1,0 +1,27 @@
+{
+ "pte_sha256": "430b584d133af6f8d42d7e7a9e6d77c568d509ed045e662a563cb448b42b5445",
+ "decision": "d-430b584d-t0.7",
+ "groups": {
+  "early_blight_unseen": {
+   "n": 20,
+   "outcomes": {
+    "abstain:unsupported_label": 14,
+    "abstain:low_confidence": 5,
+    "tomato_leaf_spot": 1
+   },
+   "accepted": 1,
+   "correct_accepts": 0,
+   "wrong_disease_accepts": 1
+  },
+  "unsupported_unseen": {
+   "n": 34,
+   "outcomes": {
+    "abstain:low_confidence": 20,
+    "abstain:unsupported_label": 13,
+    "tomato_healthy": 1
+   },
+   "accepted": 1,
+   "false_accepts": 1
+  }
+ }
+}

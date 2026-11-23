@@ -1,0 +1,16 @@
+# G2 Experiment D cross-check only: llama.cpp at a pinned commit, as a speed/RSS baseline for our ExecuTorch runner.
+# The shipped runtime stays ExecuTorch 0.6.0. Built on the machine it runs on, so GGML_NATIVE picks that CPU's
+# features (Pi 5 Cortex-A76: NEON + dotprod). Pi: --build-arg JOBS=3
+FROM docker.io/library/debian:bookworm-slim
+ARG JOBS=8
+ARG LLAMACPP_COMMIT=cd959bae99ff4bed22bef2604f45241c09bbb8c8
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential cmake git ca-certificates time \
+ && rm -rf /var/lib/apt/lists/*
+RUN git init /opt/llama.cpp && cd /opt/llama.cpp \
+ && git remote add origin https://github.com/ggml-org/llama.cpp.git \
+ && git fetch --depth 1 origin ${LLAMACPP_COMMIT} && git checkout FETCH_HEAD \
+ && cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DBUILD_SHARED_LIBS=OFF \
+      -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_SERVER=OFF \
+ && cmake --build build -j${JOBS} --target llama-completion \
+ && ls build/bin

@@ -1,0 +1,20 @@
+card_id: tomato_bacterial_spot
+card_version: 0.1.0
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_bacterial_spot
+lang: en
+title: Bacterial spot (likely)
+cause: bacteria that spread in rain and water splash, on wet hands and tools, and through infected seed and seedlings
+symptoms: small dark brown to black spots, at first water-soaked and sometimes with a yellow edge; heavily spotted leaves can turn yellow
+limits: a photo cannot confirm the disease; bacterial speck and some fungal spots look similar
+actions:
+  - {id: bs_wet, text: "Do not handle, tie or harvest plants while the leaves are wet.", source: ncsu_bacterial_spot}
+  - {id: bs_weeds, text: "Remove weeds of the tomato family and volunteer tomato plants near the field.", source: ncsu_bacterial_spot}
+  - {id: bs_seed, text: "Next season, use certified seed and healthy seedlings, and reject seedlings with spots.", source: ncsu_bacterial_spot}
+  - {id: bs_rotation, text: "Next season, plant a crop that is not tomato, chilli or brinjal in this place.", source: ncsu_bacterial_spot}
+escalate: false
+template: "The small dark spots on the leaves look like bacterial spot. A photo cannot confirm the disease, and some other spots look similar."
+reviewer: null
+reviewed_on: null

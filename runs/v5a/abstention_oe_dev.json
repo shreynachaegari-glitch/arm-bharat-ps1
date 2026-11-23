@@ -1,0 +1,79 @@
+{
+ "temperature": 1.3884708881378174,
+ "classes": [
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "taxonomy": "t2",
+ "fold_scheme": "stratified",
+ "epochs": [
+  10,
+  10
+ ],
+ "checkpoint_sha256": [
+  "3486c76ea507bd6cf2cc9ad3e6c495a087590feacc75c4ad11d7ea235088442e",
+  "dd49cd3b640192b727b830bfb47cff151b1e8ec272cbdaf817988d13957e8d4b"
+ ],
+ "note": "dev estimate: temperature and thresholds are fit and scored on the same out-of-fold data",
+ "n": {
+  "known_field": 263,
+  "ood_field_seen_types": 116,
+  "ood_novel_india": 34
+ },
+ "known_field_macro_f1": 0.6772801482227351,
+ "known_sent_to_other": 0.057034220532319393,
+ "points": [
+  {
+   "threshold": 0.0,
+   "known_coverage": 0.9429657794676806,
+   "accepted_error": 0.27419354838709675,
+   "false_accept_ood_field_seen_types": 0.3448275862068966,
+   "false_accept_ood_novel_india": 0.8823529411764706
+  },
+  {
+   "threshold": 0.4,
+   "known_coverage": 0.8555133079847909,
+   "accepted_error": 0.25333333333333335,
+   "false_accept_ood_field_seen_types": 0.3017241379310345,
+   "false_accept_ood_novel_india": 0.8235294117647058
+  },
+  {
+   "threshold": 0.5,
+   "known_coverage": 0.7262357414448669,
+   "accepted_error": 0.20418848167539266,
+   "false_accept_ood_field_seen_types": 0.27586206896551724,
+   "false_accept_ood_novel_india": 0.6176470588235294
+  },
+  {
+   "threshold": 0.6,
+   "known_coverage": 0.6121673003802282,
+   "accepted_error": 0.17391304347826086,
+   "false_accept_ood_field_seen_types": 0.16379310344827586,
+   "false_accept_ood_novel_india": 0.3235294117647059
+  },
+  {
+   "threshold": 0.7,
+   "known_coverage": 0.4790874524714829,
+   "accepted_error": 0.15079365079365079,
+   "false_accept_ood_field_seen_types": 0.10344827586206896,
+   "false_accept_ood_novel_india": 0.2647058823529412
+  },
+  {
+   "threshold": 0.8,
+   "known_coverage": 0.2889733840304182,
+   "accepted_error": 0.13157894736842105,
+   "false_accept_ood_field_seen_types": 0.0603448275862069,
+   "false_accept_ood_novel_india": 0.20588235294117646
+  },
+  {
+   "threshold": 0.9,
+   "known_coverage": 0.09505703422053231,
+   "accepted_error": 0.12,
+   "false_accept_ood_field_seen_types": 0.034482758620689655,
+   "false_accept_ood_novel_india": 0.0
+  }
+ ]
+}

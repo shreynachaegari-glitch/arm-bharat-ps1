@@ -1,0 +1,11 @@
+0.00.012.616 I common_perf_print:    sampling time =       0.41 ms
+0.00.012.617 I common_perf_print:    samplers time =       0.38 ms /    45 tokens
+0.00.012.617 I common_perf_print:        load time =       2.38 ms
+0.00.012.619 I common_perf_print: prompt eval time =       0.30 ms /     5 tokens (    0.06 ms per token, 16722.41 tokens per second)
+0.00.012.621 I common_perf_print:        eval time =       4.40 ms /    39 runs   (    0.11 ms per token,  8873.72 tokens per second)
+0.00.012.621 I common_perf_print:       total time =       5.28 ms /    44 tokens
+0.00.012.621 I common_perf_print: unaccounted time =       0.17 ms /   3.2 %      (total - sampling - prompt eval - eval) / (total)
+0.00.012.622 I common_perf_print:    graphs reused =         38
+0.00.012.622 I common_perf_print:   graph reallocs =          0    /     0        (same size) / (changed size)
+	Maximum resident set size (kbytes): 14988
+	Exit status: 0

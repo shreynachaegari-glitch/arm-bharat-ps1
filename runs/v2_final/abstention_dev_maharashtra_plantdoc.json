@@ -1,0 +1,103 @@
+{
+ "temperature": 1.5098342895507812,
+ "classes": [
+  "tomato_bacterial_spot",
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_septoria_leaf_spot"
+ ],
+ "ood_sources": [
+  "maharashtra",
+  "plantdoc"
+ ],
+ "n_field_oof": 263,
+ "n_ood_scores": 300,
+ "field_oof_accuracy": 0.6045627376425855,
+ "methods": {
+  "max_softmax": {
+   "auroc_known_vs_ood": 0.6225475285171103,
+   "auroc_correct_vs_wrong": 0.6759494436381229,
+   "operating_points": [
+    {
+     "target_ood_false_accept": 0.05,
+     "threshold": 0.7873020768165588,
+     "ood_false_accept": 0.05,
+     "known_coverage": 0.18250950570342206,
+     "accepted_error": 0.14583333333333337,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.1,
+     "threshold": 0.7382677793502808,
+     "ood_false_accept": 0.1,
+     "known_coverage": 0.2585551330798479,
+     "accepted_error": 0.19117647058823528,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.2,
+     "threshold": 0.656940758228302,
+     "ood_false_accept": 0.2,
+     "known_coverage": 0.3840304182509506,
+     "accepted_error": 0.2376237623762376,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.3,
+     "threshold": 0.5885754227638245,
+     "ood_false_accept": 0.3,
+     "known_coverage": 0.4828897338403042,
+     "accepted_error": 0.2834645669291339,
+     "n_known": 263,
+     "n_ood": 300
+    }
+   ]
+  },
+  "neg_energy": {
+   "auroc_known_vs_ood": 0.6533460076045626,
+   "auroc_correct_vs_wrong": 0.6912493952588292,
+   "operating_points": [
+    {
+     "target_ood_false_accept": 0.05,
+     "threshold": 3.7766377925872803,
+     "ood_false_accept": 0.05,
+     "known_coverage": 0.17110266159695817,
+     "accepted_error": 0.1777777777777778,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.1,
+     "threshold": 3.516000986099243,
+     "ood_false_accept": 0.1,
+     "known_coverage": 0.23954372623574144,
+     "accepted_error": 0.19047619047619047,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.2,
+     "threshold": 3.145177125930786,
+     "ood_false_accept": 0.2,
+     "known_coverage": 0.42585551330798477,
+     "accepted_error": 0.25,
+     "n_known": 263,
+     "n_ood": 300
+    },
+    {
+     "target_ood_false_accept": 0.3,
+     "threshold": 2.963686227798462,
+     "ood_false_accept": 0.3,
+     "known_coverage": 0.5437262357414449,
+     "accepted_error": 0.2727272727272727,
+     "n_known": 263,
+     "n_ood": 300
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "classes": "tomato_early_blight,tomato_healthy,tomato_late_blight,tomato_leaf_spot,tomato_other_problem",
+ "epochs": 10,
+ "batch": 32,
+ "lr": 0.001,
+ "workers": 5,
+ "threads": 9,
+ "out": "runs/v4_f0",
+ "composite_p": 0.5,
+ "backbone_lr_mult": 0.1,
+ "arch": "effnet_b0",
+ "field_fold": 0,
+ "field_oversample": 8,
+ "samples_per_epoch": 5000,
+ "taxonomy": "t2",
+ "fold_scheme": "stratified"
+}

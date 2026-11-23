@@ -1,0 +1,6 @@
+v8    S 0.605 | PlantDoc F1 0.705 err 0.082 FA seen 0.069 | NEU-dev F1 0.505 answers 0.219 err 0.241 sick->healthy 0.000 FA 0.000
+v9a   S 0.614 | PlantDoc F1 0.697 err 0.109 FA seen 0.060 | NEU-dev F1 0.531 answers 0.131 err 0.119 sick->healthy 0.000 FA 0.000 | fails: ['margin']
+v9b   S 0.601 | PlantDoc F1 0.730 err 0.070 FA seen 0.060 | NEU-dev F1 0.472 answers 0.197 err 0.151 sick->healthy 0.000 FA 0.000 | fails: ['margin']
+v9c   S 0.572 | PlantDoc F1 0.692 err 0.094 FA seen 0.069 | NEU-dev F1 0.451 answers 0.252 err 0.319 sick->healthy 0.000 FA 0.000 | fails: ['neu_error', 'margin']
+v9d   S 0.580 | PlantDoc F1 0.681 err 0.114 FA seen 0.069 | NEU-dev F1 0.479 answers 0.160 err 0.208 sick->healthy 0.000 FA 0.000 | fails: ['pd_error', 'margin']
+WINNER none

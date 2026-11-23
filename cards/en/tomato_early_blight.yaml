@@ -1,0 +1,18 @@
+card_id: tomato_early_blight
+card_version: 0.1.0
+review_status: draft_unreviewed
+crop: tomato
+region: general
+label: tomato_early_blight
+lang: en
+title: Early blight (likely)
+cause: a fungus whose spores spread by wind and need moisture to infect
+symptoms: brown or black spots with rings like a target, leathery, usually on older leaves first; fruit can get sunken dry spots
+limits: a photo cannot confirm the disease; other leaf spots can look similar early on
+actions:
+  - {id: eb_irrigation, text: "Water at the base of the plant, not over the leaves.", source: ucipm_early_blight}
+  - {id: eb_rotation, text: "Next season, plant tomato in a different place in the field.", source: ucipm_early_blight}
+escalate: false
+template: "The spots with rings on the older leaves look like early blight. A photo cannot confirm the disease, and other leaf spots can look similar."
+reviewer: null
+reviewed_on: null

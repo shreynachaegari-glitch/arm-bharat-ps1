@@ -1,0 +1,35 @@
+{
+ "pte_file": "tomato_effnet_b0_t2_fp32_xnnpack.pte",
+ "pte_sha256": "430b584d133af6f8d42d7e7a9e6d77c568d509ed045e662a563cb448b42b5445",
+ "arch": "effnet_b0",
+ "taxonomy": "t2",
+ "precision": "fp32",
+ "classes": [
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "input": {
+  "layout": "NCHW",
+  "shape": [
+   1,
+   3,
+   224,
+   224
+  ],
+  "dtype": "float32",
+  "range": [
+   0,
+   1
+  ],
+  "preprocess": "EXIF-transpose; RGB; resize shorter side to 256 (bilinear); centre-crop 224; /255",
+  "normalisation": "inside the .pte (ImageNet mean/std)"
+ },
+ "output": "logits; apply temperature + decision rule from the threshold file bound to this sha",
+ "checkpoint": "runs/v6_final/last.pt",
+ "checkpoint_sha256": "acd0ca82a12ff415a3d5b087c3b90b1bd5ca0e2d1acd52d60db557c2d6b4aede",
+ "executorch": "unknown",
+ "torch": "2.7.0+cpu"
+}

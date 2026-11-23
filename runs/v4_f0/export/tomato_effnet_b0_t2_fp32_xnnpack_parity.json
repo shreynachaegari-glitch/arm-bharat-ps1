@@ -1,0 +1,61 @@
+{
+ "classes": [
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "taxonomy": "t2",
+ "precision": "fp32",
+ "pte": "runs/v4_f0/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
+ "pte_bytes": 16050836,
+ "pte_sha256": "e919e7d6490fd5c4945602b9c30261c6abc682f9035752ad732614bdbbfc7f93",
+ "calibration_images": 0,
+ "pv_val": {
+  "fp32_macro_f1": 0.9682557199114613,
+  "pte_macro_f1": 0.9682557199114613,
+  "delta_pte_minus_fp32": 0.0,
+  "top1_agreement": 1.0,
+  "max_abs_logit_diff": 0.00016021728515625,
+  "pte_median_ms_x86": 5.050011999628623,
+  "n": 1259,
+  "per_class_recall_fp32": {
+   "tomato_early_blight": 0.92,
+   "tomato_healthy": 1.0,
+   "tomato_late_blight": 0.9895470383275261,
+   "tomato_leaf_spot": 0.952054794520548,
+   "tomato_other_problem": 0.0
+  },
+  "per_class_recall_pte": {
+   "tomato_early_blight": 0.92,
+   "tomato_healthy": 1.0,
+   "tomato_late_blight": 0.9895470383275261,
+   "tomato_leaf_spot": 0.952054794520548,
+   "tomato_other_problem": 0.0
+  }
+ },
+ "field_heldout": {
+  "fp32_macro_f1": 0.7054358663141012,
+  "pte_macro_f1": 0.7054358663141012,
+  "delta_pte_minus_fp32": 0.0,
+  "top1_agreement": 1.0,
+  "max_abs_logit_diff": 4.088878631591797e-05,
+  "pte_median_ms_x86": 5.208430000493536,
+  "n": 132,
+  "per_class_recall_fp32": {
+   "tomato_early_blight": 0.4782608695652174,
+   "tomato_healthy": 0.8125,
+   "tomato_late_blight": 0.8571428571428571,
+   "tomato_leaf_spot": 0.676923076923077,
+   "tomato_other_problem": 0.0
+  },
+  "per_class_recall_pte": {
+   "tomato_early_blight": 0.4782608695652174,
+   "tomato_healthy": 0.8125,
+   "tomato_late_blight": 0.8571428571428571,
+   "tomato_leaf_spot": 0.676923076923077,
+   "tomato_other_problem": 0.0
+  }
+ }
+}

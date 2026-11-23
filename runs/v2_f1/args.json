@@ -1,0 +1,15 @@
+{
+ "classes": "tomato_bacterial_spot,tomato_early_blight,tomato_healthy,tomato_late_blight,tomato_septoria_leaf_spot",
+ "epochs": 10,
+ "batch": 32,
+ "lr": 0.001,
+ "workers": 10,
+ "threads": 14,
+ "out": "runs/v2_f1",
+ "composite_p": 0.5,
+ "backbone_lr_mult": 0.1,
+ "arch": "effnet_b0",
+ "field_fold": 1,
+ "field_oversample": 8,
+ "samples_per_epoch": 3000
+}

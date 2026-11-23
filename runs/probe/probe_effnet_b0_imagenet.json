@@ -1,0 +1,10 @@
+{
+ "backbone": "effnet_b0_imagenet",
+ "feature_dim": 1280,
+ "A_lab_only_field_f1": 0.26475582799112213,
+ "B_with_field_folds_f1": 0.4950899034816205,
+ "B_fold_scores": [
+  0.46333689839572195,
+  0.526842908567519
+ ]
+}

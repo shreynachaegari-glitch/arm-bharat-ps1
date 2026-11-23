@@ -1,0 +1,10 @@
+{
+ "backbone": "mnv3s_imagenet",
+ "feature_dim": 576,
+ "A_lab_only_field_f1": 0.1847752247752248,
+ "B_with_field_folds_f1": 0.4577227002860865,
+ "B_fold_scores": [
+  0.41159875352298086,
+  0.5038466470491921
+ ]
+}

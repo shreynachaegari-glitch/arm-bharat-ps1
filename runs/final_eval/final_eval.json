@@ -1,0 +1,151 @@
+{
+ "pins": {
+  "pte_sha256": "6ecd519a8a184984854394a265fff9e507cbde8a363b3d3fd0a2ef7565450140",
+  "decision_sha256": "2b51071a7fd3ad42ba4bb426dd350b9636b3615764d131bf3ba098fd8bcf39b5",
+  "gates_sha256": "390e78c1abcafc11db9a32ca79564ff1dab3367fd9e3cc675bd7bea387487e84",
+  "manifest_sha256": "976c17d0efb5327c671da958cabfa012812aaeda8fa336366fabaefb4097d317",
+  "quality_thresholds": "q1-dev"
+ },
+ "decision": "d-6ecd519a-t0.8",
+ "threshold": 0.8,
+ "temperature": 1.3060697317123413,
+ "resumed": false,
+ "sets": {
+  "known": [
+   "final_external_test",
+   "plantdoc"
+  ],
+  "seen": [
+   "ood_test",
+   "plantdoc"
+  ],
+  "novel": [
+   "ood_test",
+   "maharashtra"
+  ]
+ },
+ "row": {
+  "threshold": 0.8,
+  "coverage": {
+   "k": 85,
+   "n": 259,
+   "rate": 0.3281853281853282,
+   "low": 0.2738752738058465,
+   "high": 0.3875175658975962
+  },
+  "accepted_error": {
+   "k": 6,
+   "n": 85,
+   "rate": 0.07058823529411765,
+   "low": 0.03275096292111483,
+   "high": 0.14556059432674956
+  },
+  "false_accept_seen": {
+   "k": 3,
+   "n": 107,
+   "rate": 0.028037383177570093,
+   "low": 0.00958046691681156,
+   "high": 0.0792081414308606
+  },
+  "false_accept_novel": {
+   "k": 2,
+   "n": 35,
+   "rate": 0.05714285714285714,
+   "low": 0.01581316171448853,
+   "high": 0.18607057558951973
+  },
+  "sick_called_healthy": {
+   "k": 0,
+   "n": 228,
+   "rate": 0.0,
+   "low": 0.0,
+   "high": 0.016569335354565923
+  },
+  "ood_called_healthy": {
+   "k": 1,
+   "n": 107,
+   "rate": 0.009345794392523364,
+   "low": 0.0016516716492692464,
+   "high": 0.051049356830983994
+  },
+  "quality_rejected": {
+   "known": 10,
+   "seen": 0,
+   "novel": 0
+  }
+ },
+ "gates": {
+  "blocking": {
+   "accepted_error": {
+    "rule": {
+     "max": 0.3
+    },
+    "rate": 0.07058823529411765,
+    "ci95": [
+     0.03275096292111483,
+     0.14556059432674956
+    ],
+    "passed": true
+   },
+   "false_accept_seen": {
+    "rule": {
+     "max": 0.1
+    },
+    "rate": 0.028037383177570093,
+    "ci95": [
+     0.00958046691681156,
+     0.0792081414308606
+    ],
+    "passed": true
+   },
+   "coverage": {
+    "rule": {
+     "min": 0.25
+    },
+    "rate": 0.3281853281853282,
+    "ci95": [
+     0.2738752738058465,
+     0.3875175658975962
+    ],
+    "passed": true
+   },
+   "sick_called_healthy": {
+    "rule": {
+     "max": 0.03
+    },
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.016569335354565923
+    ],
+    "passed": true
+   }
+  },
+  "report_only": {
+   "false_accept_novel": {
+    "rule": {
+     "max": 0.3
+    },
+    "rate": 0.05714285714285714,
+    "ci95": [
+     0.01581316171448853,
+     0.18607057558951973
+    ],
+    "passed": true
+   },
+   "ood_called_healthy": {
+    "rule": {
+     "max": 0.05
+    },
+    "rate": 0.009345794392523364,
+    "ci95": [
+     0.0016516716492692464,
+     0.051049356830983994
+    ],
+    "passed": true
+   }
+  },
+  "all_blocking_passed": true
+ },
+ "finished": "2026-11-21T19:46:43+0530"
+}

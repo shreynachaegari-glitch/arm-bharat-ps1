@@ -1,0 +1,18 @@
+artifacts/
+logs/
+*.pte
+build/
+# the leading / matters: a bare data/ would also hide the code in ps1/data/
+/data/
+__pycache__/
+# 21 Nov (pre-submission): keep the repo small; results stay as JSON/CSV artifacts
+runs/**/*.pt
+runs/manifest_before_*.csv
+docs/demo/raw/
+# local tool folders
+/.*/
+scripts/update_refs.sh
+# the deploy vision model is small (16 MB) and needed to run the app from a fresh clone
+!runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte
+!runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte
+!runs/v8_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte

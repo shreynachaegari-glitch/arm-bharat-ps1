@@ -1,0 +1,5 @@
+# Shared source list for English tomato cards. accessed = date the page was read for the draft.
+ucipm_early_blight: {title: "Early Blight on Tomatoes (UC Statewide IPM Program)", url: "https://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/tomearlyblight.html", accessed: "2026-10-30"}
+uconn_septoria: {title: "Problems with Septoria Leaf Spot on Tomatoes (J. Boucher, UConn Extension)", url: "https://ipm.cahnr.uconn.edu/problems-with-septoria-leaf-spot-on-tomatoes-in-2015", accessed: "2026-10-30"}
+ncsu_bacterial_spot: {title: "Bacterial Spot of Pepper and Tomato (NC State Extension, 2019)", url: "https://content.ces.ncsu.edu/bacterial-spot-of-pepper-and-tomato", accessed: "2026-10-30"}
+icar_late_blight: {title: "Late blight disease of tomato: A serious problem for Indian tomato farmers (R. Singh, Indian Horticulture 71(1), 2026)", url: "https://epubs.icar.org.in/index.php/IndHort/article/view/164935", accessed: "2026-10-30"}

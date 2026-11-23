@@ -1,0 +1,11 @@
+T=1.286  n={'known_field': 263, 'ood_field_seen_types': 116, 'ood_novel_india': 34}
+known field macro-F1 (known classes, 'other' = error) 0.681; known sent to 'other' 0.023
+   t  coverage  acc.err  FA seen  FA novel
+ 0.0     0.977    0.296    0.569     0.765
+ 0.4     0.837    0.250    0.448     0.382
+ 0.5     0.688    0.199    0.328     0.265
+ 0.6     0.559    0.150    0.207     0.176
+ 0.7     0.426    0.107    0.129     0.088
+0.78     0.327    0.105    0.078     0.059
+ 0.8     0.300    0.114    0.069     0.029
+ 0.9     0.137    0.028    0.000     0.000

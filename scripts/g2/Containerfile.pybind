@@ -1,0 +1,39 @@
+# G2: ExecuTorch 0.6.0 Python bindings built from the pinned source (same commit as the Llama runner).
+# Why: PyPI has no aarch64 Linux wheel for executorch before 1.0.0 (checked 4 Nov 2026), so the Pi cannot
+# `pip install executorch==0.6.0`. Python 3.12 = the dev venv, because locked numpy 2.5.4 has no cp311 wheel.
+# Stages:
+#   wheel    builds /opt/wheel/executorch-0.6.0a0+e67ef3b-cp312-*.whl
+#   runtime  a fresh interpreter with only requirements-pi.txt + that wheel: the Pi's Python side
+# x86 proof: podman build -t ps1-pi-runtime:0.6.0 -f scripts/g2/Containerfile.pybind scripts/g2
+# Pi:        same, with --build-arg JOBS=3 (8 GB RAM: more jobs risks the OOM killer during compilation)
+FROM docker.io/library/python:3.12-bookworm AS wheel
+
+ARG JOBS=12
+ARG ET_COMMIT=e67ef3b149688b4085605495690d0d5c6420b45a
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential git ninja-build \
+ && rm -rf /var/lib/apt/lists/*
+
+# Build-time deps only. cmake<4 keeps old submodules configurable; zstd unpacks the pinned buck2 binary.
+RUN pip install --no-cache-dir torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu \
+ && pip install --no-cache-dir "cmake<4" pyyaml ruamel.yaml zstd "setuptools<81" wheel
+
+RUN git clone https://github.com/pytorch/executorch.git /opt/executorch \
+ && cd /opt/executorch \
+ && git checkout ${ET_COMMIT} \
+ && git submodule update --init --recursive
+
+# Link XNNPACK into the extension so `.pte` files with XNNPACK delegates load.
+RUN cd /opt/executorch \
+ && CMAKE_ARGS="-DEXECUTORCH_BUILD_PYBIND=ON -DEXECUTORCH_BUILD_XNNPACK=ON" \
+    CMAKE_BUILD_ARGS="-j${JOBS}" \
+    pip wheel . --no-deps --no-build-isolation --wheel-dir /opt/wheel \
+ && ls -l /opt/wheel
+
+FROM docker.io/library/python:3.12-bookworm AS runtime
+COPY --from=wheel /opt/wheel /opt/wheel
+COPY requirements-pi.txt /opt/requirements-pi.txt
+RUN pip install --no-cache-dir torch==2.7.0 torchvision==0.22.0 --index-url https://download.pytorch.org/whl/cpu \
+ && pip install --no-cache-dir -r /opt/requirements-pi.txt \
+ && pip install --no-cache-dir --no-deps /opt/wheel/*.whl

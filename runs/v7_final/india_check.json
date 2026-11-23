@@ -1,0 +1,25 @@
+{
+ "pte_sha256": "6ecd519a8a184984854394a265fff9e507cbde8a363b3d3fd0a2ef7565450140",
+ "decision": "d-6ecd519a-t0.7",
+ "groups": {
+  "early_blight_unseen": {
+   "n": 20,
+   "outcomes": {
+    "abstain:unsupported_label": 14,
+    "abstain:low_confidence": 6
+   },
+   "accepted": 0,
+   "correct_accepts": 0,
+   "wrong_disease_accepts": 0
+  },
+  "unsupported_unseen": {
+   "n": 34,
+   "outcomes": {
+    "abstain:low_confidence": 20,
+    "abstain:unsupported_label": 14
+   },
+   "accepted": 0,
+   "false_accepts": 0
+  }
+ }
+}

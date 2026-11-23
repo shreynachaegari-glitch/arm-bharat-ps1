@@ -1,0 +1,177 @@
+{
+ "epoch": 4,
+ "pv_val": {
+  "n": 1259,
+  "macro_f1": 0.9209134606355692,
+  "accuracy": 0.926131850675139,
+  "per_class": {
+   "tomato_early_blight": {
+    "precision": 0.8905109489051095,
+    "recall": 0.8133333333333334,
+    "f1-score": 0.8501742160278746,
+    "support": 150.0
+   },
+   "tomato_healthy": {
+    "precision": 0.9118773946360154,
+    "recall": 1.0,
+    "f1-score": 0.9539078156312625,
+    "support": 238.0
+   },
+   "tomato_late_blight": {
+    "precision": 0.9075907590759076,
+    "recall": 0.9581881533101045,
+    "f1-score": 0.9322033898305084,
+    "support": 287.0
+   },
+   "tomato_leaf_spot": {
+    "precision": 0.9888268156424581,
+    "recall": 0.9092465753424658,
+    "f1-score": 0.9473684210526315,
+    "support": 584.0
+   },
+   "tomato_other_problem": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 0.0
+   },
+   "accuracy": 0.926131850675139,
+   "macro avg": {
+    "precision": 0.7397611836518981,
+    "recall": 0.7361536123971807,
+    "f1-score": 0.7367307685084554,
+    "support": 1259.0
+   },
+   "weighted avg": {
+    "precision": 0.9440483482518817,
+    "recall": 0.926131850675139,
+    "f1-score": 0.9335676912633156,
+    "support": 1259.0
+   }
+  },
+  "confusion": [
+   [
+    122,
+    7,
+    12,
+    5,
+    4
+   ],
+   [
+    0,
+    238,
+    0,
+    0,
+    0
+   ],
+   [
+    5,
+    4,
+    275,
+    1,
+    2
+   ],
+   [
+    10,
+    12,
+    16,
+    531,
+    15
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ]
+ },
+ "field_select": {
+  "n": 189,
+  "macro_f1": 0.62343431360926,
+  "accuracy": 0.6349206349206349,
+  "per_class": {
+   "tomato_early_blight": {
+    "precision": 0.47058823529411764,
+    "recall": 0.6956521739130435,
+    "f1-score": 0.5614035087719298,
+    "support": 23.0
+   },
+   "tomato_healthy": {
+    "precision": 0.43333333333333335,
+    "recall": 0.8125,
+    "f1-score": 0.5652173913043478,
+    "support": 16.0
+   },
+   "tomato_late_blight": {
+    "precision": 0.6176470588235294,
+    "recall": 0.75,
+    "f1-score": 0.6774193548387096,
+    "support": 28.0
+   },
+   "tomato_leaf_spot": {
+    "precision": 0.76,
+    "recall": 0.59375,
+    "f1-score": 0.6666666666666666,
+    "support": 64.0
+   },
+   "tomato_other_problem": {
+    "precision": 0.7804878048780488,
+    "recall": 0.5517241379310345,
+    "f1-score": 0.6464646464646465,
+    "support": 58.0
+   },
+   "accuracy": 0.6349206349206349,
+   "macro avg": {
+    "precision": 0.6124112864658058,
+    "recall": 0.6807252623688156,
+    "f1-score": 0.62343431360926,
+    "support": 189.0
+   },
+   "weighted avg": {
+    "precision": 0.682324196164464,
+    "recall": 0.6349206349206349,
+    "f1-score": 0.6406619950249945,
+    "support": 189.0
+   }
+  },
+  "confusion": [
+   [
+    16,
+    0,
+    3,
+    3,
+    1
+   ],
+   [
+    1,
+    13,
+    0,
+    0,
+    2
+   ],
+   [
+    3,
+    2,
+    21,
+    1,
+    1
+   ],
+   [
+    12,
+    5,
+    4,
+    38,
+    5
+   ],
+   [
+    2,
+    10,
+    6,
+    8,
+    32
+   ]
+  ]
+ }
+}

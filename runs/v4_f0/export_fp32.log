@@ -1,0 +1,10 @@
+WARNING:torchao.kernel.intmm:Warning: Detected no triton, on systems without Triton certain kernels will not work
+[program.cpp:135] InternalConsistency verification requested but not available
+[program.cpp:135] InternalConsistency verification requested but not available
+{
+ "precision": "fp32",
+ "pte_bytes": 16050836,
+ "pte_sha256": "e919e7d6490fd5c4945602b9c30261c6abc682f9035752ad732614bdbbfc7f93"
+}
+pv_val: FP32 0.968  .pte 0.968  (delta +0.000, top-1 agreement 1.000, n=1259, 5.1 ms/img x86)
+field_heldout: FP32 0.705  .pte 0.705  (delta +0.000, top-1 agreement 1.000, n=132, 5.2 ms/img x86)

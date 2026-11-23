@@ -1,0 +1,126 @@
+{
+ "thresholds": {
+  "version": "sweep-clip0.7",
+  "min_sharpness": 60.0,
+  "min_mean": 40.0,
+  "max_mean": 220.0,
+  "max_clipped_fraction": 0.7
+ },
+ "real": {
+  "plantdoc_field_dev": {
+   "n": 263,
+   "rejected": 0.015209125475285171,
+   "reasons": {
+    "ok": 259,
+    "too_dark": 1,
+    "too_bright": 3
+   }
+  },
+  "plantdoc_ood_dev": {
+   "n": 116,
+   "rejected": 0.0,
+   "reasons": {
+    "ok": 116
+   }
+  },
+  "maharashtra_ood_dev": {
+   "n": 34,
+   "rejected": 0.0,
+   "reasons": {
+    "ok": 34
+   }
+  },
+  "maharashtra_ext": {
+   "n": 20,
+   "rejected": 0.0,
+   "reasons": {
+    "ok": 20
+   }
+  }
+ },
+ "synthetic": {
+  "blur_sigma_2.0": {
+   "n": 429,
+   "rejected": 1.0,
+   "reasons": {
+    "blurry": 429
+   }
+  },
+  "blur_sigma_4.0": {
+   "n": 429,
+   "rejected": 1.0,
+   "reasons": {
+    "blurry": 429
+   }
+  },
+  "blur_sigma_8.0": {
+   "n": 429,
+   "rejected": 1.0,
+   "reasons": {
+    "blurry": 429
+   }
+  },
+  "dark_gain_0.3": {
+   "n": 429,
+   "rejected": 0.8554778554778555,
+   "reasons": {
+    "too_dark": 343,
+    "blurry": 24,
+    "ok": 62
+   }
+  },
+  "dark_gain_0.15": {
+   "n": 429,
+   "rejected": 1.0,
+   "reasons": {
+    "too_dark": 429
+   }
+  },
+  "bright_gain_2.5": {
+   "n": 429,
+   "rejected": 0.5757575757575758,
+   "reasons": {
+    "ok": 182,
+    "too_bright": 247
+   }
+  },
+  "bright_gain_4.0": {
+   "n": 429,
+   "rejected": 0.8834498834498834,
+   "reasons": {
+    "ok": 50,
+    "too_bright": 379
+   }
+  }
+ },
+ "sharpness_quantiles": {
+  "plantdoc_field_dev": {
+   "p1": 194.3535282535668,
+   "p5": 300.6532553001649,
+   "p10": 374.0994617474549,
+   "p25": 605.1124788961336,
+   "p50": 914.8675194931257
+  },
+  "plantdoc_ood_dev": {
+   "p1": 155.7496762526049,
+   "p5": 221.45624705179895,
+   "p10": 368.239967161726,
+   "p25": 599.0170643803107,
+   "p50": 1114.1171153587266
+  },
+  "maharashtra_ood_dev": {
+   "p1": 230.514827750408,
+   "p5": 250.51459450332652,
+   "p10": 269.4553621456855,
+   "p25": 378.02602149918675,
+   "p50": 565.0632543777012
+  },
+  "maharashtra_ext": {
+   "p1": 195.03245612218564,
+   "p5": 239.74032674901602,
+   "p10": 244.72109607006942,
+   "p25": 314.33823255687537,
+   "p50": 401.32691243270204
+  }
+ }
+}

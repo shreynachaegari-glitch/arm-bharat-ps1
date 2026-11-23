@@ -1,0 +1,10 @@
+{
+ "backbone": "convnext_tiny_imagenet",
+ "feature_dim": 768,
+ "A_lab_only_field_f1": 0.34319850140823593,
+ "B_with_field_folds_f1": 0.5025246176175646,
+ "B_fold_scores": [
+  0.4613730713730714,
+  0.5436761638620577
+ ]
+}

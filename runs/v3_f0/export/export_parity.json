@@ -1,0 +1,62 @@
+{
+ "classes": [
+  "tomato_bacterial_spot",
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_septoria_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "pte": "runs/v3_f0/export/tomato_effnet_b0_int8_xnnpack.pte",
+ "pte_bytes": 4428568,
+ "pte_sha256": "1f26d7a109e71cfbc793cc8d64cf240fe656174c6ce87a6767e69d7de7c1cd98",
+ "calibration_images": 512,
+ "pv_val": {
+  "fp32_macro_f1": 0.7909648392940757,
+  "int8_graph_macro_f1": 0.7481753116422656,
+  "pte_macro_f1": 0.7525194501924178,
+  "delta_pte_minus_fp32": -0.038445389101657845,
+  "pte_median_ms_x86": 4.186905999631563,
+  "n": 1259,
+  "per_class_recall_fp32": {
+   "tomato_bacterial_spot": 0.9622641509433962,
+   "tomato_early_blight": 0.8466666666666667,
+   "tomato_healthy": 1.0,
+   "tomato_late_blight": 0.9686411149825784,
+   "tomato_septoria_leaf_spot": 0.924812030075188,
+   "tomato_other_problem": 0.0
+  },
+  "per_class_recall_pte": {
+   "tomato_bacterial_spot": 0.9811320754716981,
+   "tomato_early_blight": 0.7933333333333333,
+   "tomato_healthy": 0.9915966386554622,
+   "tomato_late_blight": 0.8466898954703833,
+   "tomato_septoria_leaf_spot": 0.8082706766917294,
+   "tomato_other_problem": 0.0
+  }
+ },
+ "field_heldout": {
+  "fp32_macro_f1": 0.44370662516089876,
+  "int8_graph_macro_f1": 0.3893409744660293,
+  "pte_macro_f1": 0.4027949876009717,
+  "delta_pte_minus_fp32": -0.04091163755992705,
+  "pte_median_ms_x86": 4.132298000513401,
+  "n": 129,
+  "per_class_recall_fp32": {
+   "tomato_bacterial_spot": 0.2,
+   "tomato_early_blight": 0.6666666666666666,
+   "tomato_healthy": 0.45,
+   "tomato_late_blight": 0.625,
+   "tomato_septoria_leaf_spot": 0.7428571428571429,
+   "tomato_other_problem": 0.0
+  },
+  "per_class_recall_pte": {
+   "tomato_bacterial_spot": 0.23333333333333334,
+   "tomato_early_blight": 0.5833333333333334,
+   "tomato_healthy": 0.3,
+   "tomato_late_blight": 0.59375,
+   "tomato_septoria_leaf_spot": 0.6571428571428571,
+   "tomato_other_problem": 0.0
+  }
+ }
+}

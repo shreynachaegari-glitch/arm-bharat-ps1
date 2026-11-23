@@ -1,0 +1,12 @@
+composite: 10732/12273 rows eligible -> effective composite rate 0.44 (requested 0.50)
+{"epoch": 1, "train_loss": 1.5611572883605958, "pv_val_f1": 0.6467171351884262, "field_f1": 0.349324045723617, "seconds": 296.1}
+{"epoch": 2, "train_loss": 0.9954506858825684, "pv_val_f1": 0.8637906033863008, "field_f1": 0.4826241180009424, "seconds": 300.0}
+{"epoch": 3, "train_loss": 0.7064753189086914, "pv_val_f1": 0.8803375038216623, "field_f1": 0.5442150090901957, "seconds": 292.2}
+{"epoch": 4, "train_loss": 0.6316540542602539, "pv_val_f1": 0.9526322322452637, "field_f1": 0.6159966330428418, "seconds": 294.5}
+{"epoch": 5, "train_loss": 0.5726584205627442, "pv_val_f1": 0.9575392937118854, "field_f1": 0.6143313242201007, "seconds": 291.4}
+{"epoch": 6, "train_loss": 0.530672702217102, "pv_val_f1": 0.9676666101924299, "field_f1": 0.631631205297451, "seconds": 286.3}
+{"epoch": 7, "train_loss": 0.5214036237716675, "pv_val_f1": 0.9609661502433994, "field_f1": 0.6053533709116345, "seconds": 287.2}
+{"epoch": 8, "train_loss": 0.5012131856918335, "pv_val_f1": 0.9699686353950686, "field_f1": 0.6064694220045765, "seconds": 289.9}
+{"epoch": 9, "train_loss": 0.5086048469543457, "pv_val_f1": 0.9730953442221635, "field_f1": 0.6160166671356111, "seconds": 292.5}
+{"epoch": 10, "train_loss": 0.49433211555480955, "pv_val_f1": 0.9703957313932474, "field_f1": 0.6096603928630796, "seconds": 290.1}
+best selection score 0.632; checkpoint runs/v5a_f1/best.pt
