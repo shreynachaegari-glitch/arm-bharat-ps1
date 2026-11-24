@@ -4,7 +4,7 @@
 
 Team: `[team name]` · Members: `[names, roles]` · Faculty mentor: `[name]` · Repository: `[GitHub URL]` · Date: 22 Nov 2026
 
-> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 264 automated tests pass. Everything in this report was measured on an x86 Linux laptop, because our Raspberry Pi 5 has not yet arrived. The Pi build kit is ready and tested on x86 (Section 9). On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
+> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 267 automated tests pass. Everything in this report was measured on an x86 Linux laptop, because our Raspberry Pi 5 has not yet arrived. The Pi build kit is ready and tested on x86 (Section 9). On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
 
 ---
 
@@ -280,7 +280,7 @@ Screens: `docs/app-screens/`. Demo video: `docs/demo/ps1_app_demo_x86_20261121.m
   4. benchmark matrix
   5. Llama runner
   6. optional llama.cpp cross-check
-- **Tests.** `python -m pytest` runs 264 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
+- **Tests.** `python -m pytest` runs 267 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
 - **Reports from artifacts.** `scripts/make_report.py` regenerates every table from run files and aborts if tests fail.
 
 ## 10. Limitations (stated plainly)

@@ -1,0 +1,9 @@
+WARNING:torchao.kernel.intmm:Warning: Detected no triton, on systems without Triton certain kernels will not work
+WARNING: checkpoint trained on all field data; field parity unavailable, use the fold models
+[program.cpp:135] InternalConsistency verification requested but not available
+{
+ "precision": "fp32",
+ "pte_bytes": 30809364,
+ "pte_sha256": "d9ac86e2aaaaf999aa667c349ede05b296c0f58625e37cb73f5ff9c995733fc0"
+}
+pv_val: FP32 0.968  .pte 0.968  (delta +0.000, top-1 agreement 1.000, n=1259, 9.3 ms/img x86)

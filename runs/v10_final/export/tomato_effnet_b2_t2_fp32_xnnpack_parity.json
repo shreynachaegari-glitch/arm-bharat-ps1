@@ -1,0 +1,38 @@
+{
+ "classes": [
+  "tomato_early_blight",
+  "tomato_healthy",
+  "tomato_late_blight",
+  "tomato_leaf_spot",
+  "tomato_other_problem"
+ ],
+ "taxonomy": "t2",
+ "precision": "fp32",
+ "pte": "runs/v10_final/export/tomato_effnet_b2_t2_fp32_xnnpack.pte",
+ "pte_bytes": 30809364,
+ "pte_sha256": "d9ac86e2aaaaf999aa667c349ede05b296c0f58625e37cb73f5ff9c995733fc0",
+ "calibration_images": 0,
+ "pv_val": {
+  "fp32_macro_f1": 0.9684646256472719,
+  "pte_macro_f1": 0.9684646256472719,
+  "delta_pte_minus_fp32": 0.0,
+  "top1_agreement": 1.0,
+  "max_abs_logit_diff": 0.0001010894775390625,
+  "pte_median_ms_x86": 9.315232999142609,
+  "n": 1259,
+  "per_class_recall_fp32": {
+   "tomato_early_blight": 0.9333333333333333,
+   "tomato_healthy": 1.0,
+   "tomato_late_blight": 0.9651567944250871,
+   "tomato_leaf_spot": 0.9708904109589042,
+   "tomato_other_problem": 0.0
+  },
+  "per_class_recall_pte": {
+   "tomato_early_blight": 0.9333333333333333,
+   "tomato_healthy": 1.0,
+   "tomato_late_blight": 0.9651567944250871,
+   "tomato_leaf_spot": 0.9708904109589042,
+   "tomato_other_problem": 0.0
+  }
+ }
+}

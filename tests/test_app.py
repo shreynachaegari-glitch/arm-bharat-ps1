@@ -1,7 +1,10 @@
 """Local offline web app (ps1/app): Screen 1 at once, Screen 2 after the checker, nothing leaves the device."""
 import io
 import re
+import struct
+import zlib
 from pathlib import Path
+from unittest.mock import patch
 
 import cv2
 import numpy as np
@@ -99,6 +102,38 @@ def test_too_large_upload_is_rejected(tmp_path):
     _, c = make(tmp_path, max_upload_bytes=1000)
     r = diagnose(c, png_bytes())
     assert r.status_code == 413 and "error" in r.get_json()
+
+
+def blank_png(width: int, height: int) -> bytes:
+    """A valid all-black greyscale PNG; compresses so well that a huge one is a small upload."""
+    def chunk(tag: bytes, body: bytes) -> bytes:
+        return struct.pack(">I", len(body)) + tag + body + struct.pack(">I", zlib.crc32(tag + body))
+
+    pack = zlib.compressobj(9)
+    row = b"\0" * (width + 1)
+    body = b"".join(pack.compress(row) for _ in range(height)) + pack.flush()
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0))
+            + chunk(b"IDAT", body) + chunk(b"IEND", b""))
+
+
+@pytest.mark.parametrize("side", [9_000, 14_000])        # 81 MP; 196 MP is past Pillow's own hard limit
+def test_decode_bomb_is_refused_before_opencv_sees_it(tmp_path, side):
+    _, c = make(tmp_path)
+    with patch("ps1.quality_gate.cv2.imread", side_effect=AssertionError("decoded a bomb")) as imread:
+        r = diagnose(c, blank_png(side, side))
+    assert r.status_code == 400 and "too large" in r.get_json()["error"]
+    imread.assert_not_called()
+    assert list((tmp_path / "uploads").iterdir()) == []
+
+
+def test_format_pillow_cannot_size_but_opencv_decodes_is_refused(tmp_path):
+    hdr = tmp_path / "a.hdr"
+    assert cv2.imwrite(str(hdr), np.zeros((64, 64, 3), np.float32))
+    _, c = make(tmp_path)
+    with patch("ps1.quality_gate.cv2.imread", side_effect=AssertionError("decoded unsized")) as imread:
+        r = diagnose(c, hdr.read_bytes(), name="leaf.png")
+    assert r.status_code == 400
+    imread.assert_not_called()
 
 
 def test_screen2_arrives_after_the_checker(tmp_path):

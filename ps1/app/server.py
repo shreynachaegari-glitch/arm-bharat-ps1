@@ -22,6 +22,7 @@ from concurrent.futures import Future, ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, get_args
 
+import cv2
 from flask import Flask, jsonify, render_template, request
 from PIL import Image
 from werkzeug.exceptions import RequestEntityTooLarge
@@ -144,13 +145,18 @@ def _save_upload(storage, upload_dir: Path) -> Path:
     return Path(name)
 
 
-def _too_many_pixels(path: Path) -> bool:
-    """Read only the image header: a small PNG can decode to gigabytes (decode bomb on an 8 GB Pi)."""
+def _unsafe_to_decode(path: Path) -> bool:
+    """Read only the image header: a small PNG can decode to gigabytes (decode bomb on an 8 GB Pi).
+
+    Fails closed: a file whose size cannot be read is refused if OpenCV would still try to decode it.
+    """
     try:
         with Image.open(path) as img:
             width, height = img.size
-    except (OSError, ValueError, Image.DecompressionBombError):
-        return False                                   # unreadable: the quality gate rejects it as such
+    except Image.DecompressionBombError:
+        return True                                    # past Pillow's own hard limit (about 179 MP)
+    except (OSError, ValueError):
+        return cv2.haveImageReader(str(path))          # False: not an image, the quality gate rejects it as such
     return width * height > MAX_IMAGE_PIXELS
 
 
@@ -209,9 +215,9 @@ def create_app(cfg: PipelineConfig, *, upload_dir: Path | None = None,
         future: Future | None = None
         try:
             path = _save_upload(storage, upload_dir)
-            if _too_many_pixels(path):
+            if _unsafe_to_decode(path):
                 vision_slots.release()
-                return _error("the photo is too large; please take it again at normal camera size", 400)
+                return _error("the photo is too large or damaged; please take it again at normal camera size", 400)
             req = Request(crop="tomato", lang=lang, image_path=str(path))
             future = worker.vision(run_screen1, req, cfg)
             future.add_done_callback(vision_slots.release)

@@ -1,0 +1,7 @@
+v8 x3 S 0.591 | PlantDoc F1 0.709 err 0.103 FA seen 0.066 | NEU-dev F1 0.474 answers 0.173 err 0.249 sick->healthy 0.000 FA 0.000
+v10x3 S 0.626 | PlantDoc F1 0.743 err 0.079 FA seen 0.092 | NEU-dev F1 0.509 answers 0.184 err 0.259 sick->healthy 0.000 FA 0.001
+v10s0 S 0.608 | PlantDoc F1 0.736 err 0.098 FA seen 0.078 | NEU-dev F1 0.479 answers 0.164 err 0.321 sick->healthy 0.000 FA 0.001
+v10s1 S 0.642 | PlantDoc F1 0.737 err 0.073 FA seen 0.086 | NEU-dev F1 0.548 answers 0.179 err 0.249 sick->healthy 0.000 FA 0.001
+v10s2 S 0.628 | PlantDoc F1 0.756 err 0.065 FA seen 0.112 | NEU-dev F1 0.500 answers 0.208 err 0.208 sick->healthy 0.000 FA 0.001
+rule: {'seed_mean_gain': True, 'seed_mean_pd_error': True, 'seed_mean_pd_fa_seen': True, 'seed_mean_neu_error': True, 'seed_mean_neu_sick_healthy': True, 'seed_mean_neu_fa_ood': True, 'pass': True}
+PASS

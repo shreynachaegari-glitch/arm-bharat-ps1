@@ -1,0 +1,91 @@
+{
+ "seed_means": {
+  "v8": {
+   "pd_f1": 0.7088195853154832,
+   "neu_f1": 0.47351710601661146,
+   "S": 0.5911683456660473,
+   "pd_error": 0.10283751645285022,
+   "pd_fa_seen": 0.06609195402298851,
+   "pd_coverage": 0.3193916349809886,
+   "neu_coverage": 0.17343256653134867,
+   "neu_error": 0.24926299491860313,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0,
+   "S_values": [
+    0.6050236116754899,
+    0.588135961409389,
+    0.580345463913263
+   ]
+  },
+  "v10": {
+   "pd_f1": 0.7430050095542855,
+   "neu_f1": 0.509125947026777,
+   "S": 0.6260654782905313,
+   "pd_error": 0.078787373063074,
+   "pd_fa_seen": 0.09195402298850575,
+   "pd_coverage": 0.41698352344740175,
+   "neu_coverage": 0.1840324763193505,
+   "neu_error": 0.25927882196226015,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.00102880658436214,
+   "S_values": [
+    0.6076351063274867,
+    0.6423792635317467,
+    0.6281820650123603
+   ]
+  }
+ },
+ "neu_test": {
+  "v8": {
+   "f1_forced": 0.5817111576214017,
+   "coverage": 0.1882510013351135,
+   "error": 0.11347517730496454,
+   "sick_healthy": 0.0,
+   "fa_ood": 0.0
+  },
+  "v10": {
+   "f1_forced": 0.4607417424610276,
+   "coverage": 0.20694259012016022,
+   "error": 0.18064516129032257,
+   "sick_healthy": 0.0,
+   "fa_ood": 0.0
+  }
+ },
+ "india": {
+  "v8": {
+   "unsupported_called_healthy": 1,
+   "wrong_disease": 0
+  },
+  "v10": {
+   "unsupported_called_healthy": 1,
+   "wrong_disease": 2
+  }
+ },
+ "speed": {
+  "v8": {
+   "ms": 5.063639997388236,
+   "parity_delta": 0.0
+  },
+  "v10": {
+   "ms": 9.315232999142609,
+   "parity_delta": 0.0
+  }
+ },
+ "rule": {
+  "seed_mean_gain": true,
+  "seed_mean_pd_error": true,
+  "seed_mean_pd_fa_seen": true,
+  "seed_mean_neu_error": true,
+  "seed_mean_neu_sick_healthy": true,
+  "seed_mean_neu_fa_ood": true,
+  "test_f1": false,
+  "test_error": false,
+  "test_sick_healthy": true,
+  "test_fa_ood": true,
+  "india_healthy": true,
+  "india_wrong_disease": false,
+  "speed": true,
+  "parity": true,
+  "adopt_v10": false
+ }
+}

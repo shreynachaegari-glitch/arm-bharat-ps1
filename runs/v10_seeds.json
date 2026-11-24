@@ -1,0 +1,47 @@
+{
+ "seed_means": {
+  "v8": {
+   "pd_f1": 0.7088195853154832,
+   "neu_f1": 0.47351710601661146,
+   "S": 0.5911683456660473,
+   "pd_error": 0.10283751645285022,
+   "pd_fa_seen": 0.06609195402298851,
+   "pd_coverage": 0.3193916349809886,
+   "neu_coverage": 0.17343256653134867,
+   "neu_error": 0.24926299491860313,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.0,
+   "S_values": [
+    0.6050236116754899,
+    0.588135961409389,
+    0.580345463913263
+   ]
+  },
+  "v10": {
+   "pd_f1": 0.7430050095542855,
+   "neu_f1": 0.509125947026777,
+   "S": 0.6260654782905313,
+   "pd_error": 0.078787373063074,
+   "pd_fa_seen": 0.09195402298850575,
+   "pd_coverage": 0.41698352344740175,
+   "neu_coverage": 0.1840324763193505,
+   "neu_error": 0.25927882196226015,
+   "neu_sick_healthy": 0.0,
+   "neu_fa_ood": 0.00102880658436214,
+   "S_values": [
+    0.6076351063274867,
+    0.6423792635317467,
+    0.6281820650123603
+   ]
+  }
+ },
+ "rule": {
+  "seed_mean_gain": true,
+  "seed_mean_pd_error": true,
+  "seed_mean_pd_fa_seen": true,
+  "seed_mean_neu_error": true,
+  "seed_mean_neu_sick_healthy": true,
+  "seed_mean_neu_fa_ood": true,
+  "pass": true
+ }
+}

@@ -1,0 +1,2 @@
+[program.cpp:135] InternalConsistency verification requested but not available
+runs/v10_final/export/tomato_effnet_b2_t2_fp32_xnnpack.pte [test]: F1(forced, 3 classes) 0.461; t=0.8: answers 155/749, wrong 28/155, sick->healthy 0/486, unsupported accepted 0/486

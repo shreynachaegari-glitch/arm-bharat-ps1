@@ -28,7 +28,7 @@ uv venv .venv --python 3.12 && source .venv/bin/activate
 uv pip install -r requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
                                              # executorch 0.6.0, torch 2.7.0 (CPU), flask, waitress, ...
-python -m pytest -q                          # 264 tests
+python -m pytest -q                          # 267 tests
 ```
 
 **Llama model** (not in git: 1.1 GB). Download the pinned revision into `artifacts/llama/`:
@@ -65,7 +65,7 @@ The advice cards are drafts until an agriculture expert reviews them, and the pa
 | `ps1/app/` | local web app (Flask + waitress, offline page) |
 | `scripts/` | training/export runs, Pi kit (`g2/`), Llama card check, report generator |
 | `runs/` | result artifacts (JSON/CSV); the submitted model `runs/v7_final/export/` (v6_final kept as fallback); `runs/v8_final/export/` optional (report §5.4) |
-| `tests/` | 264 tests |
+| `tests/` | 267 tests |
 
 ## Data
 

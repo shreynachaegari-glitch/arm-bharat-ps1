@@ -1,0 +1,28 @@
+[program.cpp:135] InternalConsistency verification requested but not available
+{
+ "pte_sha256": "d9ac86e2aaaaf999aa667c349ede05b296c0f58625e37cb73f5ff9c995733fc0",
+ "decision": "d-d9ac86e2-t0.8",
+ "groups": {
+  "early_blight_unseen": {
+   "n": 20,
+   "outcomes": {
+    "abstain:low_confidence": 12,
+    "abstain:unsupported_label": 6,
+    "tomato_healthy": 2
+   },
+   "accepted": 2,
+   "correct_accepts": 0,
+   "wrong_disease_accepts": 2
+  },
+  "unsupported_unseen": {
+   "n": 34,
+   "outcomes": {
+    "abstain:low_confidence": 20,
+    "abstain:unsupported_label": 13,
+    "tomato_healthy": 1
+   },
+   "accepted": 1,
+   "false_accepts": 1
+  }
+ }
+}
