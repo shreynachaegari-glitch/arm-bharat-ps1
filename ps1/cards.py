@@ -16,9 +16,9 @@ ReviewStatus = Literal["draft_unreviewed", "reviewed"]
 CARDS_DIR = Path(__file__).resolve().parent.parent / "cards"
 CHEMICAL_CONTROL_LINE = (
     "If chemical control is needed, use only a product registered for this crop and disease; "
-    "ask your extension officer or the Kisan Call Centre (1800-180-1551) for the product and dose."
+    "ask your local agriculture extension officer for the product and dose."
 )
-CONTACT_SOURCE = "Kisan Call Centre 1800-180-1551 (needs mobile network)"
+CONTACT_SOURCE = "Your local agriculture extension officer"
 
 
 class CardAction(BaseModel):

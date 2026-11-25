@@ -159,3 +159,11 @@ def test_real_pte_runs_end_to_end_after_loader_returns(leaf):
 def test_healthy_never_calls_llama(leaf, tmp_path):
     r = run(req(leaf), cfg(logits_for("tomato_healthy"), llama=fake_llama(tmp_path, "anything")))
     assert r.screen2 is None and "llama_explanation" not in r.timings_ms
+
+
+def test_referral_names_the_extension_officer_not_a_phone_line():
+    # The advice must work with no network: it points to the local extension officer, never to a call-centre number.
+    from ps1.cards import CHEMICAL_CONTROL_LINE, CONTACT_SOURCE
+    for text in (CHEMICAL_CONTROL_LINE, CONTACT_SOURCE):
+        assert "extension officer" in text
+        assert "Kisan" not in text and "1800" not in text

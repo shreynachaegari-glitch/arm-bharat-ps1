@@ -57,6 +57,14 @@ def test_no_model_note_by_default(tmp_path):
     assert 'id="model-note"' not in c.get("/").get_data(as_text=True)
     assert c.get("/api/health").get_json()["model_note"] is None
 
+def test_photo_picker_offers_camera_and_gallery(tmp_path):
+    # `capture` forces the camera on phones; without it the browser offers camera, photos and files.
+    _, c = make(tmp_path)
+    page = c.get("/").get_data(as_text=True)
+    picker = re.search(r'<input id="photo"[^>]*>', page).group(0)
+    assert 'accept="image/*"' in picker and "capture" not in picker
+
+
 def test_accepted_photo_gets_card_now_and_upload_is_deleted(tmp_path):
     app, c = make(tmp_path)
     r = diagnose(c, png_bytes())

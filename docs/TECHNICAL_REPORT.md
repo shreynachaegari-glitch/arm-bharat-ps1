@@ -2,9 +2,9 @@
 
 **Arm Bharat AI-SoC Challenge 2026-27 · Problem Statement 1 (Offline Crop Disease/Pest Detection and Advisory) · Phase 1 report**
 
-Members: Nachaegari Sreyesh Kumar, T Sai Vardhan, Ch Saivenkat · Faculty mentor: Dr S Swetha · Repository: https://github.com/shreynachaegari-glitch/arm-bharat-ps1 · Date: 24 Nov 2026
+Members: Nachaegari Sreyesh Kumar, T Sai Vardhan, Ch Saivenkat · Faculty mentor: Dr S Swetha · Repository: https://github.com/shreynachaegari-glitch/arm-bharat-ps1 · Date: 25 Nov 2026
 
-> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 271 automated tests pass. Accuracy was measured on an x86 Linux laptop. Speed and memory were measured on an Arm phone (Nothing Phone (2), Snapdragon 8+ Gen 1, Android 16, offline) and on the laptop; our Raspberry Pi 5 has not arrived, so there are no Pi numbers (Section 8). On the phone the same v7 model gives the same answers as on the laptop (30 of 30 photos, largest logit difference 0.000006), and Llama explains a leaf in about 6 seconds. On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
+> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 273 automated tests pass. Accuracy was measured on an x86 Linux laptop. Speed and memory were measured on an Arm phone (Nothing Phone (2), Snapdragon 8+ Gen 1, Android 16, offline) and on the laptop; our Raspberry Pi 5 has not arrived, so there are no Pi numbers (Section 8). On the phone the same v7 model gives the same answers as on the laptop (30 of 30 photos, largest logit difference 0.000006), and Llama explains a leaf in about 6 seconds. On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
 
 **Where to find what:** methodology: Sections 2-4 and 6 · results: Section 5 · hardware utilization: Section 8 · optimization techniques: Section 8.1 · limitations: Section 10.
 
@@ -20,7 +20,7 @@ We chose depth over breadth for Phase 1:
 |---|---|
 | One crop: **tomato** leaves | Maize, other crops (one stable crop first) |
 | 3 disease outputs + healthy + "other problem": early blight, late blight, leaf spot (bacterial spot or Septoria, merged), healthy, other | Splitting leaf spot (the two were confused on field photos) |
-| Non-chemical, sourced actions from advice cards; a fixed line that sends chemical questions to the extension officer / Kisan Call Centre | **Pesticide names and doses** (a wrong dose harms people and crops; needs expert review) |
+| Non-chemical, sourced actions from advice cards; a fixed line that sends chemical questions to the local agriculture extension officer | **Pesticide names and doses** (a wrong dose harms people and crops; needs expert review) |
 | Abstaining when unsure ("no clear match") | Forcing an answer for every photo |
 | English UI and advice | Hindi/Telugu advice (needs reviewed translations; Section 10) |
 | Severity: *not shown* | A severity % that has not been validated |
@@ -277,7 +277,7 @@ The gate sheet, regenerated for the deployed model's recipe (seed-0 EMA folds), 
 - **Fully offline.** The page ships its own CSS/JS and system fonts. A Content-Security-Policy (`default-src 'self'`) blocks any other origin. A browser test confirmed zero requests leave the device.
 - **Two ways to use it:**
   - the Pi's own screen at `localhost`
-  - a phone on the Pi's Wi-Fi hotspot. Photos use `<input type=file capture>`, which works over plain HTTP; live camera access would need HTTPS.
+  - a phone on the Pi's Wi-Fi hotspot. Photos use `<input type=file accept="image/*">`, so the phone offers its camera, gallery and files; this works over plain HTTP, whereas live camera access from the page itself would need HTTPS.
 - **Screen 1 at once, Screen 2 when checked.** The page shows a progress note while Llama works. A new photo cancels the phone's own not-yet-started explanation and ignores stale responses.
 - **Privacy.** The photo is saved under a server-chosen name, used once and deleted as soon as Screen 1 is built. No GPS and no accounts.
 - **Robustness:**
@@ -351,7 +351,7 @@ Accuracy-side choices (weight averaging, field oversampling, background composit
   4. benchmark matrix
   5. Llama runner
   6. optional llama.cpp cross-check
-- **Tests.** `python -m pytest` runs 271 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
+- **Tests.** `python -m pytest` runs 273 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
 - **Reports from artifacts.** `scripts/make_report.py` regenerates every table from run files and aborts if tests fail.
 
 ## 10. Limitations (stated plainly)
