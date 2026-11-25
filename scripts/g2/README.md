@@ -37,8 +37,8 @@ Disconnect the network from here on: the app must work with none.
 
     scripts/g2/preflight.sh | tee logs/g2_preflight.log
     .venv/bin/python -m pytest -q | tee logs/g2_pytest.log
-    .venv/bin/python -m ps1.vision.golden --check --pte runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte \
-      --golden runs/v6_final/golden.json --report logs/g2_golden.json
+    .venv/bin/python -m ps1.vision.golden --check --pte runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte \
+      --golden runs/v7_final/golden.json --report logs/g2_golden.json
 
 Golden check: same `.pte` and images as x86. `top1_agreement` must be 1.0. If only `max_abs_diff` is above the tolerance, or
 `tensor_mismatches` is above 0, do not change anything: send the JSON to Sreyesh. Tensors differing means the image decode

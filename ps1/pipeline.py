@@ -209,11 +209,17 @@ def native_llama_config(root: Path, binary: str) -> LlamaConfig:
                        tokenizer_path=str(models / "tokenizer.model"), timeout_s=60)
 
 
+def _is_executable(command: str) -> bool:
+    """`shutil.which`, or the file's own mode bits: under proot (Android) os.access() can ask about the wrong path."""
+    path = Path(command)
+    return shutil.which(command) is not None or (path.is_file() and bool(path.stat().st_mode & 0o111))
+
+
 def default_llama_config(root: Path) -> LlamaConfig:
     """PS1_LLAMA_MAIN (explicit path) > llama_main on PATH > the x86 dev container."""
     explicit = os.environ.get("PS1_LLAMA_MAIN")
     if explicit:
-        if not shutil.which(explicit):
+        if not _is_executable(explicit):
             raise FileNotFoundError(f"PS1_LLAMA_MAIN={explicit} is not an executable file")
         return native_llama_config(root, explicit)
     found = shutil.which("llama_main")

@@ -1,14 +1,14 @@
 {
- "note": "G2 / Experiment D configuration matrix for the deploy candidate v6_final. Same file on x86 (dev) and the Pi 5. Paths are relative to the repo root; run from there. Only uncontaminated runs (idle CPU) count as results; on the Pi also record the PSU (27 W) and cooler state. A config whose artifacts are absent is skipped with a message.",
+ "note": "G2 / Experiment D configuration matrix for the submitted model v7_final (the INT8 row is the older v6 export, kept as a latency reference only). Same file on x86 (dev) and the Pi 5. Paths are relative to the repo root; run from there. Only uncontaminated runs (idle CPU) count as results; on the Pi also record the PSU (27 W) and cooler state. A config whose artifacts are absent is skipped with a message.",
  "configs": [
-  {"name": "vision_fp32", "pte": "runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
-   "decision": "runs/v6_final/export/decision.json", "runs": 50, "warmups": 10},
+  {"name": "vision_fp32", "pte": "runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
+   "decision": "runs/v7_final/export/decision.json", "runs": 50, "warmups": 10},
   {"name": "vision_int8", "pte": "runs/v6_final/export/tomato_effnet_b0_t2_int8_xnnpack.pte",
    "decision": "runs/v6_final/export/decision_int8_latency_only.json", "runs": 50, "warmups": 10,
    "note": "latency only: uses the FP32 temperature, so its accept/abstain results are not valid"},
-  {"name": "full_fp32_llama_t4", "pte": "runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
-   "decision": "runs/v6_final/export/decision.json", "llama": true, "llama_threads": 4, "runs": 5, "warmups": 1},
-  {"name": "full_fp32_llama_t2", "pte": "runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
-   "decision": "runs/v6_final/export/decision.json", "llama": true, "llama_threads": 2, "runs": 5, "warmups": 1}
+  {"name": "full_fp32_llama_t4", "pte": "runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
+   "decision": "runs/v7_final/export/decision.json", "llama": true, "llama_threads": 4, "runs": 5, "warmups": 1},
+  {"name": "full_fp32_llama_t2", "pte": "runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte",
+   "decision": "runs/v7_final/export/decision.json", "llama": true, "llama_threads": 2, "runs": 5, "warmups": 1}
  ]
 }

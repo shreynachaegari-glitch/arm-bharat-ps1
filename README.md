@@ -28,7 +28,7 @@ uv venv .venv --python 3.12 && source .venv/bin/activate
 uv pip install -r requirements.lock \
   --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
                                              # executorch 0.6.0, torch 2.7.0 (CPU), flask, waitress, ...
-python -m pytest -q                          # 267 tests
+python -m pytest -q                          # 271 tests
 ```
 
 **Llama model** (not in git: 1.1 GB). Download the pinned revision into `artifacts/llama/`:
@@ -65,7 +65,7 @@ The advice cards are drafts until an agriculture expert reviews them, and the pa
 | `ps1/app/` | local web app (Flask + waitress, offline page) |
 | `scripts/` | training/export runs, Pi kit (`g2/`), Llama card check, report generator |
 | `runs/` | result artifacts (JSON/CSV); the submitted model `runs/v7_final/export/` (v6_final kept as fallback); `runs/v8_final/export/` optional (report §5.4) |
-| `tests/` | 267 tests |
+| `tests/` | 271 tests |
 
 ## Data
 
@@ -77,4 +77,4 @@ The datasets are not stored in git. `ps1/data/build_splits.py` rebuilds the pinn
 
 ## Licences
 
-The code licence is to be added by the team. Llama 3.2 is used under the Llama 3.2 Community License ("Built with Llama"). Dataset licences are listed above.
+This repository has no separate code licence file. Llama 3.2 is used under the Llama 3.2 Community License ("Built with Llama"). Dataset licences are listed above.

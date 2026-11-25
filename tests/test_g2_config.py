@@ -1,6 +1,8 @@
 import stat
 from pathlib import Path
 
+import pytest
+
 from ps1.bench import missing_files
 from ps1.pipeline import default_llama_config
 
@@ -43,3 +45,22 @@ def test_missing_files_names_the_absent_artifacts(tmp_path):
     spec = {"pte": str(present), "decision": str(tmp_path / "gone.json")}
     assert missing_files(spec) == [str(tmp_path / "gone.json")]
     assert missing_files({"pte": str(present), "decision": str(present)}) == []
+
+
+def test_explicit_runner_is_found_when_os_access_is_unreliable(tmp_path, monkeypatch):
+    # proot on Android answered os.access() for a path outside the guest, so a runner that works looked missing.
+    runner = tmp_path / "llama_main"
+    runner.write_text("#!/bin/sh\n")
+    runner.chmod(0o755)
+    monkeypatch.setenv("PS1_LLAMA_MAIN", str(runner))
+    monkeypatch.setattr("shutil.which", lambda *a, **k: None)
+    assert default_llama_config(tmp_path).command[0] == str(runner)
+
+
+def test_explicit_runner_without_execute_permission_is_refused(tmp_path, monkeypatch):
+    runner = tmp_path / "llama_main"
+    runner.write_text("")
+    runner.chmod(0o644)
+    monkeypatch.setenv("PS1_LLAMA_MAIN", str(runner))
+    with pytest.raises(FileNotFoundError):
+        default_llama_config(tmp_path)

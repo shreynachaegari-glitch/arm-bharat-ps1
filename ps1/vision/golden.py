@@ -4,8 +4,8 @@ Write once on the x86 dev box (PyPI executorch 0.6.0), then check on the Pi 5 or
 It separates three findings: logits drift (runtime/kernels), top-1 flips (user-visible), and preprocessing
 tensors that differ (JPEG decoder or resize differences, which shift logits for a different reason).
 Non-sealed images only. Usage:
-  python -m ps1.vision.golden --write --pte <m>.pte --images runs/bench/images --golden runs/v6_final/golden.json
-  python -m ps1.vision.golden --check --pte <m>.pte --golden runs/v6_final/golden.json
+  python -m ps1.vision.golden --write --pte <m>.pte --images runs/bench/images --golden runs/v7_final/golden.json
+  python -m ps1.vision.golden --check --pte <m>.pte --golden runs/v7_final/golden.json
 """
 import argparse
 import hashlib

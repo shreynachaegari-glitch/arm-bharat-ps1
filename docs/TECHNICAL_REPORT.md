@@ -2,9 +2,11 @@
 
 **Arm Bharat AI-SoC Challenge 2026-27 · Problem Statement 1 (Offline Crop Disease/Pest Detection and Advisory) · Phase 1 report**
 
-Team: `[team name]` · Members: `[names, roles]` · Faculty mentor: `[name]` · Repository: `[GitHub URL]` · Date: 22 Nov 2026
+Members: Nachaegari Sreyesh Kumar, T Sai Vardhan, Ch Saivenkat · Faculty mentor: Dr S Swetha · Repository: https://github.com/shreynachaegari-glitch/arm-bharat-ps1 · Date: 24 Nov 2026
 
-> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 267 automated tests pass. Everything in this report was measured on an x86 Linux laptop, because our Raspberry Pi 5 has not yet arrived. The Pi build kit is ready and tested on x86 (Section 9). On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
+> **Status in one paragraph.** The full offline pipeline runs end to end. A photo goes through a quality gate, an EfficientNet-B0 ExecuTorch model, an abstaining decision step, an expert-style advice card, and a Llama 3.2 1B (INT4, ExecuTorch) explanation that is checked before it is shown. It runs inside a local web app, and 271 automated tests pass. Accuracy was measured on an x86 Linux laptop. Speed and memory were measured on an Arm phone (Nothing Phone (2), Snapdragon 8+ Gen 1, Android 16, offline) and on the laptop; our Raspberry Pi 5 has not arrived, so there are no Pi numbers (Section 8). On the phone the same v7 model gives the same answers as on the laptop (30 of 30 photos, largest logit difference 0.000006), and Llama explains a leaf in about 6 seconds. On the sealed external test, scored once after the thresholds were frozen, the deployed model **passed every blocking gate**. It answered 33% of supported field photos with 7% of those answers wrong, never called a sick plant healthy (0 of 228), and let 3% of unsupported problems through (Section 5.3). The other accuracy figures are out-of-fold development estimates.
+
+**Where to find what:** methodology: Sections 2-4 and 6 · results: Section 5 · hardware utilization: Section 8 · optimization techniques: Section 8.1 · limitations: Section 10.
 
 ---
 
@@ -173,6 +175,38 @@ v8 passes every check in the rule. Even so, **v7 remains the submitted model**: 
 
 Phase 2 will build on v8 once it has its own fresh test.
 
+### 5.5 Two more attempts after v8 (neither adopted)
+
+Both attempts used the same method: one rule, written down before training, and the NEU set split into a development half (for choosing) and a test half (for the final check). The score S is the mean of the PlantDoc out-of-fold F1 and the NEU development F1. The threshold stayed at 0.80.
+
+**v9: training changes only, same network and speed.** Four variants were screened against v8 with one seed each. A variant needed a gain of at least 0.02 in S and no guardrail broken.
+
+| variant | S | PlantDoc F1 | NEU-dev F1 | NEU-dev error | outcome |
+|---|---|---|---|---|---|
+| v8 (baseline, seed 0) | 0.605 | 0.705 | 0.505 | 24% | |
+| v9a: twice the training | 0.614 | 0.697 | 0.531 | 12% | gain too small (+0.009) |
+| v9b: backbone learning rate ×3 | 0.601 | 0.730 | 0.472 | 15% | no gain |
+| v9c: full fine-tune (×10) | 0.572 | 0.692 | 0.451 | 32% | no gain, more errors |
+| v9d: Bangladesh photos ×2 | 0.580 | 0.681 | 0.479 | 21% | no gain, more PlantDoc errors |
+
+No variant won. Every difference is about the size of the seed-to-seed noise.
+
+**v10: a larger network (EfficientNet-B2, 260 px).** It passed the first stage (mean of three seeds) and failed the second (final model on photos it was not chosen on):
+
+| stage | check | v8 | v10 | limit | result |
+|---|---|---|---|---|---|
+| 1 | mean S, 3 seeds | 0.591 | 0.626 | ≥ 0.606 | pass |
+| 1 | five error guardrails | | | | all pass |
+| 2 | NEU-test forced-choice F1 | 0.582 | 0.461 | ≥ 0.582 | **fail** |
+| 2 | NEU-test error of answers | 11% (16/141) | 18% (28/155) | ≤ 14.3% | **fail** |
+| 2 | Indian photos, wrong accepted answers | 0/20 | 2/20 | 0 | **fail** |
+| 2 | NEU-test sick called healthy; unsupported accepted | 0/486; 0/486 | 0/486; 0/486 | ≤ 1%; ≤ 3% | pass |
+| 2 | Indian unsupported called healthy | 1/34 | 1/34 | ≤ 1 | pass |
+| 2 | x86 latency of the `.pte` | 5.1 ms | 9.3 ms | ≤ 15.2 ms | pass |
+| 2 | `.pte` minus FP32 macro-F1 | 0.000 | 0.000 | ≥ −0.02 | pass |
+
+v10 was rejected. Both wrong Indian answers called a diseased leaf healthy, the most harmful kind of error. The larger network looked better on the photos used to choose it and did worse on new ones. Caveats: each final model is one seed, and the 95% intervals of the two NEU-test error rates overlap (v8 7-18%, v10 13-25%). Result files: `runs/v9_screen.json`, `runs/v10_seeds.json`, `runs/v10_summary.json`.
+
 ## 6. Llama through ExecuTorch
 
 ### 6.1 Deployment
@@ -255,9 +289,13 @@ The gate sheet, regenerated for the deployed model's recipe (seed-0 EMA folds), 
   - model confidence is never shown as a percentage
   - the model and decision versions are printed on every result
 
-Screens: `docs/app-screens/`. Demo video: `docs/demo/ps1_app_demo_x86_20261121.mp4`, recorded on the x86 laptop and labelled as such. Screens and video were made with v6_final (the same recipe without weight averaging); the app now loads v7_final.
+| Home | Screen 1: card at once | Screen 2: checked Llama text | No clear match |
+|---|---|---|---|
+| ![Home](app-screens/01_home.png) | ![Screen 1](app-screens/02_screen1_leaf_spot.png) | ![Screen 2](app-screens/03_screen2_leaf_spot.png) | ![No match](app-screens/04_no_match.png) |
 
-## 8. Latency, memory and power
+Screens: `docs/app-screens/`. Demo video: see the submission form (a recording on the Arm phone is planned; the earlier `docs/demo/ps1_app_demo_x86_20261121.mp4` was recorded on the x86 laptop and is labelled as such). Screens and video were made with v6_final (the same recipe without weight averaging); the app now loads v7_final.
+
+## 8. Hardware utilization: latency, memory and power
 
 | Measurement (x86 laptop, idle CPU) | value |
 |---|---|
@@ -266,13 +304,46 @@ Screens: `docs/app-screens/`. Demo video: `docs/demo/ps1_app_demo_x86_20261121.m
 | Llama explanation, 4 threads / 2 threads (p50) | **4.6 s** / 6.5 s |
 | Peak RSS: vision process / Llama runner | 0.56 GB / 1.64 GB (≈ 2.2 GB total) |
 
-- **Raspberry Pi 5 (8 GB):** *not yet measured*. The Pi has not arrived. The same benchmark matrix (`scripts/g2/bench_matrix.json`) runs there unchanged. It records p50/p90/p95/p99, RSS, `vcgencmd measure_temp` and throttling flags. A run is flagged *contaminated* if the CPU was busy, because we saw vision rise from 5 ms to ~900 ms on a loaded CPU.
-- **Power:** not yet measured. On the Pi we will read idle / Screen 1 / Llama power with an inline USB-C power meter and report energy per diagnosis.
-- **Memory fit:** the measured 2.2 GB fits an 8 GB Pi 5 with a wide margin, and a 4 GB board as well.
+**On an Arm phone (25 Nov 2026).** Nothing Phone (2) (model AIN065, Snapdragon 8+ Gen 1 `SM8475`, 11.5 GB RAM, Android 16), running the app and both models inside Termux with no network, from the bundle built by `scripts/phone/` (cross-built for Arm64 from the same pinned ExecuTorch 0.6.0 commit). Same v7 model file as the laptop (sha256 `6ecd519a…`).
 
-## 9. Reproducibility and Pi readiness
+| Measurement (phone, FP32 v7, 4 threads for Llama) | value |
+|---|---|
+| Same answers as the laptop (golden check, 30 photos) | **30/30 top-1 identical**, largest logit difference 6.2e-06, 0 tensor mismatches |
+| Vision only: Screen 1 total, p50 / p95 | **37.9 ms** / 98.1 ms; peak RSS 585 MB |
+| Screen 1 with Llama configured, p50 / p95 | 50.8 ms / 145.0 ms |
+| Llama explanation through the pipeline, 4 threads / 2 threads (p50) | **4.99 s** / 5.87 s |
+| Llama runner alone, 10 runs: decode / time to first token / total (median) | **30.7 tok/s** (19.7-31.9) / 1.23 s / **6.4 s** (8.9 s worst) |
+| Llama peak RSS | **1.64 GB** |
+| Llama outputs | 10 of 10 runs succeeded, all identical |
+
+- **Caveat on these phone numbers.** Our own harness marked every phone run *contaminated (busy CPU)*, because Android's load average was above the idle limit; we cannot show the phone was idle, so treat the times as upper-leaning figures. Android also schedules the cores itself, and the phone ran through Termux, not as a native app. The phone was not placed on a power meter, so there is no power figure. Evidence: `docs/phone/` (terminal photos of the run).
+- **What this shows.** The same ExecuTorch build runs both models on an Arm phone with no internet, gives the laptop's answers exactly, and fits easily in memory (about 2.2 GB for both models, on a phone with 11.5 GB).
+
+- **Which model was timed on the laptop:** this run used an earlier checkpoint with the same EfficientNet-B0 architecture and export path as v7_final; only the weights differ. CPU: Intel Core i9-13905H.
+- **What runs where:** both models run on the CPU through ExecuTorch's XNNPACK backend (NEON kernels on Arm). No GPU or NPU is used, so the same build needs no add-on board on the Pi.
+- **Raspberry Pi 5 (8 GB):** *not measured*. The Pi has not arrived. The same benchmark matrix (`scripts/g2/bench_matrix.json`) runs there unchanged. It records p50/p90/p95/p99, RSS, `vcgencmd measure_temp` and throttling flags. A run is flagged *contaminated* if the CPU was busy, because we saw vision rise from 5 ms to ~900 ms on a loaded CPU.
+- **Power:** not yet measured. On the Pi we will read idle / Screen 1 / Llama power with an inline USB-C power meter and report energy per diagnosis.
+- **Memory fit:** the measured 2.2 GB fits the 11.5 GB phone, and would also fit an 8 GB Pi 5 and a 4 GB board.
+
+### 8.1 Optimization techniques
+
+| Technique | What we did | Measured effect (x86) |
+|---|---|---|
+| Quantized language model | Llama 3.2 1B as Meta's SpinQuant INT4 `.pte` (4-bit weights, 8-bit dynamic activations) | 1.14 GB file, 1.64 GB peak RSS, 48.9 tok/s |
+| Small vision network | EfficientNet-B0 at 224 px, FP32 through XNNPACK | 16.1 MB, 4.8 ms/image in the export test loop (44 ms p50 inside the full app run, table above); B2 at 260 px costs 9.3 ms and was rejected (Section 5.5) |
+| INT8 vision, tried and rejected | post-training quantization of the earlier v6_final, 512 calibration images | 4.4 MB (from 16.1) and 4.6 ms, but macro-F1 −0.175, so FP32 ships |
+| Two separate lanes | vision and Llama each have their own single-thread queue | Screen 1 no longer waits for a running Llama call: 5.1 s when queued behind it, 0.12 s on its own lane (single measurements) |
+| Cheap checks first | size limit read from the image header, then the quality gate, then the network | oversized files are refused before any decode; blurred or dark photos never reach the network |
+| Less text to generate | Llama only rewrites one short card text, at most 120 tokens, greedy | about 4 s per explanation |
+| Skip needless work | Llama is not called for a healthy leaf or an abstention; a new photo cancels older waiting jobs | those requests cost only Screen 1 |
+| Thread count | Llama timed at 4 and 2 threads | 4.6 s against 6.5 s (p50) |
+
+Accuracy-side choices (weight averaging, field oversampling, background compositing, the "other problem" class and the abstention threshold) cost nothing at run time; they are described in Section 4.
+
+## 9. Reproducibility, phone and Pi readiness
 
 - **Pinned stack.** executorch 0.6.0, torch 2.7.0 (CPU), torchvision 0.22.0; `requirements.lock` holds all versions.
+- **Phone build path.** `scripts/phone/build_bundle.sh` cross-builds ExecuTorch 0.6.0 and the Python bindings for Arm64 on the x86 laptop (Debian's GCC 12, the same pinned commit) and packs an Arm64 Debian root file system, the models and the app into one file. `proot` in Termux runs it, so nothing is compiled on the phone. `scripts/phone/README.md` has the steps. The golden check and the benchmark ran on the Nothing Phone (2) (Section 8).
 - **Pi build path.** PyPI has **no aarch64 wheel for executorch 0.6.0**. We build the Python bindings from the pinned source in a container (`scripts/g2/Containerfile.pybind`, Python 3.12). On x86 this build matches the reference exactly (golden check 30/30, max logit difference 0.0). The aarch64 build itself is proven only once the Pi arrives. The runbook is `scripts/g2/README.md`:
   1. preflight
   2. tests
@@ -280,12 +351,12 @@ Screens: `docs/app-screens/`. Demo video: `docs/demo/ps1_app_demo_x86_20261121.m
   4. benchmark matrix
   5. Llama runner
   6. optional llama.cpp cross-check
-- **Tests.** `python -m pytest` runs 267 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
+- **Tests.** `python -m pytest` runs 271 tests: contracts, quality thresholds, checker, Llama wrapper (fake runners), pipeline branches, app endpoints, export parity, weight averaging, the seed decision rule and the sealed-harness safeguards.
 - **Reports from artifacts.** `scripts/make_report.py` regenerates every table from run files and aborts if tests fail.
 
 ## 10. Limitations (stated plainly)
 
-1. **No Pi numbers yet.** Every latency and memory figure is from x86.
+1. **No Pi numbers, and the phone runs were flagged.** Latency and memory come from an x86 laptop and one Arm phone (every phone run marked contaminated by our own harness, running through Termux). Power was not measured.
 2. **One sealed test, PlantDoc-like images.** The sealed test (Section 5.3) passed, but its supported photos are PlantDoc images, and it ran with the input gate waived and on x86. All other accuracy numbers are out-of-fold development estimates.
 3. **India gap.** The model does not yet recognise Indian early blight (0/20). It abstains, which is safe, but the assistant is not yet useful on that disease.
 4. **Abstains often.** At t = 0.80 it answers about a third of supported field photos (sealed: 33%). This is a deliberate trade for low error (sealed: 7%) and for never calling a sick plant healthy.
@@ -299,7 +370,7 @@ Screens: `docs/app-screens/`. Demo video: `docs/demo/ps1_app_demo_x86_20261121.m
 
 | Item | What |
 |---|---|
-| Pi 5 bring-up | Pi 5 numbers and power; optionally the AI HAT+ for vision |
+| Device bring-up | native Android app (no Termux) and Pi 5 numbers and power, once boards are available; optionally the AI HAT+ for vision |
 | Indian field data | consented, expert-labelled photos; retrain and re-check |
 | Input gate | MobileNetV3-Small INT8 gate (tomato leaf / other plant / non-plant), ~2 ms on Pi 5 per Arm's benchmark |
 | Pests | **IP102**, a small, verified subset of tomato pests (e.g. *Tuta absoluta* / leaf miner, whitefly) |

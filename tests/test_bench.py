@@ -1,6 +1,6 @@
 import numpy as np
 
-from ps1.bench import image_list, llama_outcomes, machine, stats
+from ps1.bench import contaminated, image_list, llama_outcomes, machine, stats
 
 
 def test_stats_match_numpy_percentiles():
@@ -41,3 +41,19 @@ def test_checker_rejection_is_a_real_run_and_keeps_the_latency_valid():
 
 def test_no_llama_runs_at_all_is_not_valid():
     assert llama_outcomes([])["valid"] is False
+
+
+def test_machine_without_a_readable_load_average_is_unknown_not_idle(monkeypatch):
+    # Android hides /proc/loadavg from apps: "cannot tell" must never be reported as an idle CPU.
+    def hidden():
+        raise OSError("load average was unobtainable")
+
+    monkeypatch.setattr("ps1.bench.os.getloadavg", hidden)
+    m = machine()
+    assert m["load1"] is None and m["busy"] is None
+
+
+def test_contamination_is_unknown_when_either_reading_is_missing():
+    assert contaminated({"busy": None}, {"busy": False}) is None
+    assert contaminated({"busy": None}, {"busy": True}) is True
+    assert contaminated({"busy": False}, {"busy": False}) is False

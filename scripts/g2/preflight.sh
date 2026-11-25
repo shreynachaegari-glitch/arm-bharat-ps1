@@ -55,8 +55,8 @@ check_sha() {
 }
 check_sha artifacts/llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8.pte 8715cdba9e91f6bede00cc5f2d6b12397b95225da5630c4972a8da03001cda3b
 check_sha artifacts/llama/tokenizer.model 82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55
-check_sha runs/v6_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte 430b584d133af6f8d42d7e7a9e6d77c568d509ed045e662a563cb448b42b5445
-for f in runs/v6_final/export/decision.json runs/v6_final/golden.json scripts/g1/prompt.txt scripts/g2/bench_matrix.json; do
+check_sha runs/v7_final/export/tomato_effnet_b0_t2_fp32_xnnpack.pte 6ecd519a8a184984854394a265fff9e507cbde8a363b3d3fd0a2ef7565450140
+for f in runs/v7_final/export/decision.json runs/v7_final/golden.json scripts/g1/prompt.txt scripts/g2/bench_matrix.json; do
   [[ -s "$ROOT/$f" ]] && ok "present $f" || fail "missing $f"
 done
 # On the dev box these are symlinks into data/: -L follows them, and a dangling link (plain copy) is not counted.

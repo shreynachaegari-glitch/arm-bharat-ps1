@@ -1,0 +1,8 @@
+# Arm64 cross-build for the phone: ExecuTorch 0.6.0 llama_main and the Python 3.12 bindings, from the same pinned
+# commit as the x86 images. Debian's own cross compiler (GCC 12), so glibc 2.36 = the bookworm root file system below.
+# Needs ps1-et:0.6.0 (scripts/g1/Containerfile) and ps1-pi-runtime:0.6.0 (scripts/g2/Containerfile.pybind).
+FROM localhost/ps1-pi-runtime:0.6.0
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends g++-aarch64-linux-gnu ninja-build zstd qemu-user-static proot
+RUN pip install --no-cache-dir "cmake<4" zstd ruamel.yaml pyyaml
+COPY --from=localhost/ps1-et:0.6.0 /opt/executorch /opt/executorch

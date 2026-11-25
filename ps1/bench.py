@@ -47,10 +47,21 @@ def pi_thermal() -> dict[str, str] | None:
 
 
 def machine() -> dict:
-    load1 = os.getloadavg()[0]
     cores = os.cpu_count() or 1
+    try:
+        load1 = os.getloadavg()[0]
+    except OSError:                   # Android hides /proc/loadavg from apps
+        load1 = None
     return {"platform": platform.platform(), "machine": platform.machine(), "python": platform.python_version(),
-            "cores": cores, "load1": load1, "busy": load1 / cores > BUSY_LOAD_PER_CORE}
+            "cores": cores, "load1": load1, "busy": None if load1 is None else load1 / cores > BUSY_LOAD_PER_CORE}
+
+
+def contaminated(before: dict, after: dict) -> bool | None:
+    """True if either reading was busy; None if a reading is missing, because "cannot tell" is not "idle"."""
+    readings = (before["busy"], after["busy"])
+    if any(readings):
+        return True
+    return None if None in readings else False
 
 
 def llama_outcomes(checker_results: list[str]) -> dict:
@@ -92,7 +103,7 @@ def bench_config(cfg_spec: dict, images: list[str], warmups: int, runs: int, roo
             "peak_rss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024,
             "thermal_before": thermal_before, "thermal_after": pi_thermal(),
             "machine_before": before, "machine_after": after,
-            "contaminated": before["busy"] or after["busy"],
+            "contaminated": contaminated(before, after),
             "llama": llama_outcomes(checker_results) if llama else None,
             "per_run_ms": per_stage}
 
@@ -132,7 +143,8 @@ def main() -> None:
         result = bench_config(spec, images, spec.get("warmups", args.warmups), runs, root)
         (out / f"{spec['name']}.json").write_text(json.dumps(result, indent=1))
         s = result["stages"]["screen1_total"]
-        flag = "  ** CONTAMINATED (busy CPU) **" if result["contaminated"] else ""
+        flag = {True: "  ** CONTAMINATED (busy CPU) **", None: "  (CPU load not readable here)"}.get(
+            result["contaminated"], "")
         llama = result["stages"].get("llama_explanation")
         if result["llama"] and not result["llama"]["valid"]:
             flag += f"  ** LLAMA INVALID, not a latency result: {result['llama']['counts']} **"
